@@ -1,6 +1,5 @@
 'use client';
 
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
@@ -9,9 +8,6 @@ import { useWallet } from '@txnlab/use-wallet-react';
 import { useRouter } from 'next/router';
 import { ConnectWalletModal } from '../../connectModal';
 import Link from 'next/link';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { data, dataTwo } from '../../mock';
-import { NavCard } from '../../navCard';
 import { VoteModal } from '../../voteModal';
 import { IProposalContract } from '@/interfaces/proposal.interface';
 import { useProposalActions } from '@/features/governance/actions/proposal.action';
@@ -166,10 +162,10 @@ export const DetailsPage = () => {
                     `${activeAddress.slice(0, 10)}...`
                   ) : (
                     <>
-                      <img
+                      {/* <img
                         src="https://res.cloudinary.com/dlinprg6k/image/upload/v1710656577/wallet-02-1_tjruyq.png"
                         alt="wallet-icon"
-                      />
+                      /> */}
                       Connect Wallet
                     </>
                   )}

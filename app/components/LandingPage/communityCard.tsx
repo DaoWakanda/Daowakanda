@@ -9,7 +9,7 @@ interface CardProps {
 }
 export function CommunityCard({ image, text, topic, address }: CardProps) {
   return (
-    <Link className={styles['card']} target="_blank" href={address}>
+    <Link className={styles['card']} href={address}>
       <img src={image} alt="post" />
       <div className={styles['card-detail']}>
         <div className={styles['topic']}>{topic}</div>

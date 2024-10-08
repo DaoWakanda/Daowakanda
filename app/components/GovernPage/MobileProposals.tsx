@@ -1,15 +1,8 @@
 import { IoIosArrowDown, IoIosSearch } from 'react-icons/io';
-import { CardVote } from './CardVote';
 import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
-import { useGovernanceActions } from '@/features/governance/actions/governance.action';
 import { useRecoilValue } from 'recoil';
-import {
-  ProposalContractsAtom,
-  ProposalsAtom,
-} from '@/features/governance/state/governance.atom';
-import { CardVoteLoader } from './CardVoteLoader';
-import moment from 'moment';
+import { ProposalContractsAtom } from '@/features/governance/state/governance.atom';
 import { MdOutlineNoteAdd } from 'react-icons/md';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { SampleProposal } from '@/interfaces';
