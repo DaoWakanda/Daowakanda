@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { BackgroundOverlay } from '../../shared/BackgroundOverlay';
 import styles from './index.module.scss';
-import { CreateProposalDto } from '@/interfaces/governance.interface';
-import { APP_ID } from '@/constants/appId';
-import { useGovernanceContract } from '@/features/governance/actions/governance.contract';
-import { useGovernanceActions } from '@/features/governance/actions/governance.action';
 import { useNotify } from '@/hooks';
-import moment from 'moment';
 import { ThreeDots } from 'react-loader-spinner';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { useProposalContract } from '@/features/governance/actions/proposal.contract';

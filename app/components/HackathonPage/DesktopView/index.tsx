@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';

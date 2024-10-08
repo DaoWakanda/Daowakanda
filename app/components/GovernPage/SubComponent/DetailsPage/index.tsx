@@ -1,6 +1,5 @@
 'use client';
 
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
@@ -9,9 +8,6 @@ import { useWallet } from '@txnlab/use-wallet-react';
 import { useRouter } from 'next/router';
 import { ConnectWalletModal } from '../../connectModal';
 import Link from 'next/link';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { data, dataTwo } from '../../mock';
-import { NavCard } from '../../navCard';
 import { VoteModal } from '../../voteModal';
 import { IProposalContract } from '@/interfaces/proposal.interface';
 import { useProposalActions } from '@/features/governance/actions/proposal.action';

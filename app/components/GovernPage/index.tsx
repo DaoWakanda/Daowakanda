@@ -3,10 +3,8 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Link from 'next/link';
 import { PiDiscordLogo, PiTelegramLogo } from 'react-icons/pi';
-import { FaHeart, FaHistory } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 import { FiFacebook } from 'react-icons/fi';
-import { IoChatbubblesOutline } from 'react-icons/io5';
-import { BsQuestionSquare } from 'react-icons/bs';
 import { RiTwitterXLine } from 'react-icons/ri';
 import { NavCard } from './navCard';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
@@ -18,11 +16,9 @@ import { useGovernanceActions } from '@/features/governance/actions/governance.a
 import { useRecoilState } from 'recoil';
 import { ProposalsAtom } from '@/features/governance/state/governance.atom';
 import { useNotify } from '@/hooks';
-import { MdOutlineNoteAdd } from 'react-icons/md';
 import { data, dataTwo } from './mock';
 import { useRouter } from 'next/router';
 import { MobileProposals } from './MobileProposals';
-import { PaginationBar } from './SubComponent/PaginationBar';
 
 export function GovernPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
