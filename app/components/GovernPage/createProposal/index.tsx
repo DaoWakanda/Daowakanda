@@ -155,7 +155,7 @@ export function CreateProposalModal({
               ></textarea>
             </div>
 
-            <div className={styles['options-block']}>
+            {/* <div className={styles['options-block']}>
               <label>Options</label>
               <div className={styles['option']}>
               <input
@@ -172,12 +172,11 @@ export function CreateProposalModal({
               />
               </div>
               <button className={styles['add-option']}>Add Option</button>
-            </div>
-            
+            </div> */}
 
             <div className={styles['date-section']}>
               <div className={styles['date-control']}>
-                <div className={styles['date-controls']}>
+                {/* <div className={styles['date-controls']}>
                 <label>Start Date</label>
                 <input
                   type="datetime-local"
@@ -191,28 +190,28 @@ export function CreateProposalModal({
                   }}
                   required
                 />
-                </div>
+                </div> */}
 
                 <div className={styles['date-controls']}>
-                <label>End Date</label>
-                <input
-                  type="datetime-local"
-                  onChange={(evt) => {
-                    const date = new Date(evt.target.value);
-                    const dateUnix = date.valueOf();
+                  <label>End Date</label>
+                  <input
+                    type="datetime-local"
+                    onChange={(evt) => {
+                      const date = new Date(evt.target.value);
+                      const dateUnix = date.valueOf();
 
-                    if (dateUnix < now) {
-                      notify.error('End date cannot be in the past');
-                      return;
-                    }
+                      if (dateUnix < now) {
+                        notify.error('End date cannot be in the past');
+                        return;
+                      }
 
-                    setData((data) => ({
-                      ...data,
-                      endDate: dateUnix,
-                    }));
-                  }}
-                  required
-                />
+                      setData((data) => ({
+                        ...data,
+                        endDate: dateUnix,
+                      }));
+                    }}
+                    required
+                  />
                 </div>
               </div>
             </div>

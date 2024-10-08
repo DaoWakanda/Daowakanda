@@ -360,10 +360,10 @@ export function GovernPage() {
             <div className={styles['dao']}>DAO WAKANDA</div>
           </div>
           <div className={styles['right']}>
-            <Link href="https://twitter.com/DaoWakanda" target={'_blank'}>
+            <Link href="https://twitter.com/DaoWakanda">
               <RiTwitterXLine className={styles['icon']} />
             </Link>
-            <Link href="https://t.me/daowakanda" target={'_blank'}>
+            <Link href="https://t.me/daowakanda">
               <PiTelegramLogo className={styles['icon']} />
             </Link>
             <PiDiscordLogo className={styles['icon']} />

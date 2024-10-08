@@ -267,11 +267,7 @@ export function LandingPage() {
             </div>
           </div>
         )}
-        <Link
-          className={styles['notice']}
-          href={'/hackathon'}
-          target={'_blank'}
-        >
+        <Link className={styles['notice']} href={'/hackathon'}>
           <div className={styles['text']}>
             2024 Algorand Regional Hackathon ~~~ Coming soon ~~~
           </div>
@@ -368,11 +364,11 @@ export function LandingPage() {
             />
 
             <Card
-              onclick={() => router.push('/faucet')}
+              // onclick={() => router.push('/faucet')}
               title="Claim Wakanda NFT"
               step="Step 2"
               image="https://res.cloudinary.com/dkuwhyun7/image/upload/v1709861971/payment-success-02_yvbygt.png"
-              description="To have the right to vote for or against proposals you must possess our WAKANDA NFTs. If you do not have, kindly claim Wakanda NFT."
+              description="To have the right to vote for or against proposals you must possess our WAKANDA NFTs."
             />
 
             <Card
@@ -395,10 +391,7 @@ export function LandingPage() {
         </div>
         <div className={styles['bottom']}>
           <div className={styles['special-card']}>
-            <Link
-              href="https://medium.com/@daowakanda/introducing-the-daowakanda-testnet-claim-your-free-nft-and-engage-in-governance-682156156d2e"
-              target="blank"
-            >
+            <Link href="https://medium.com/@daowakanda/introducing-the-daowakanda-testnet-claim-your-free-nft-and-engage-in-governance-682156156d2e">
               <img
                 src="https://res.cloudinary.com/dlinprg6k/image/upload/v1720618394/faucetImage_f5szql.webp"
                 alt="blog-post"
@@ -511,29 +504,22 @@ export function LandingPage() {
             <Link
               href="https://twitter.com/DaoWakanda"
               className={styles['item']}
-              target="_blank"
             >
               <FaXTwitter className={styles['icon']} /> Twitter
             </Link>
             <Link
               href={'https://github.com/digichains/wakandaV3'}
               className={styles['item']}
-              target="_blank"
             >
               <FaGithub className={styles['icon']} /> Github
             </Link>
-            <Link
-              href="https://t.me/daowakanda"
-              className={styles['item']}
-              target="_blank"
-            >
+            <Link href="https://t.me/daowakanda" className={styles['item']}>
               <FaTelegramPlane className={styles['icon']} />
               Telegram
             </Link>
 
             <Link
               href="https://medium.com/@daowakanda"
-              target="_blank"
               className={styles['item']}
             >
               <img

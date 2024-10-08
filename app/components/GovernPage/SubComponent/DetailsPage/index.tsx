@@ -166,10 +166,10 @@ export const DetailsPage = () => {
                     `${activeAddress.slice(0, 10)}...`
                   ) : (
                     <>
-                      <img
+                      {/* <img
                         src="https://res.cloudinary.com/dlinprg6k/image/upload/v1710656577/wallet-02-1_tjruyq.png"
                         alt="wallet-icon"
-                      />
+                      /> */}
                       Connect Wallet
                     </>
                   )}
