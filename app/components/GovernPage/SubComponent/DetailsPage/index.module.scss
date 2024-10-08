@@ -11,7 +11,7 @@
   font: inter;
 
   
- .mobile-header {
+  .mobile-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,7 +23,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 100;
 
     .mobile-logo {
       width: 32px;
@@ -149,131 +148,6 @@
     }
   }
 }
-/*Side nav bar*/
-.mobile-side-nav {
-  min-height: 100vh;
-  background: #222222e5;
-  display: flex;
-  flex-direction: column;
-  gap: 87px;
-  z-index: 999;
-  width: 100vw;
-  padding: 16px;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  animation: slide 0.5s forwards;
-
-  header {
-    min-height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .mobile-logo {
-      width: 31px;
-      height: 31px;
-
-      .link {
-        width: 31px;
-        height: 31px;
-
-        img {
-          width: inherit;
-          height: inherit;
-        }
-      }
-    }
-    .mobile-menu-bar {
-      width: 31px;
-      height: 31px;
-    }
-  }
-  .nav-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 32px;
-    min-height: 296px;
-    width: 100%;
-
-    .nav-list {
-      width: 259px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-
-      .section {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-
-        .nav-item {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: #fff;
-          font-family: 'Avenir LT Std';
-          font-size: 20px;
-          font-weight: 600;
-          cursor: pointer;
-        }
-
-        .tab {
-          display: flex;
-          flex-direction: column;
-          padding-left: 8px;
-          gap: 8px;
-          left: -100%;
-          animation: slideTab 0.5s forwards;
-
-          .tab-item {
-            font-family: 'Avenir LT Std';
-            font-size: 14px;
-            font-weight: 600;
-          }
-        }
-      }
-
-      .nav-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: #fff;
-        font-family: 'Avenir LT Std';
-        font-size: 20px;
-        font-weight: 600;
-        cursor: pointer;
-      }
-    }
-    .nav-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #2f3033;
-      color: #fff;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      border-radius: 50px;
-      width: 259px;
-      min-height: 60px;
-      padding: 8px 16px;
-      gap: 16px;
-      border: 1px solid #fff;
-
-      img {
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-}
-
-
-
 
   .top-box {
     display: flex;
@@ -711,27 +585,137 @@
 
   
 
-    @keyframes rotateUp {
-        0% {
-          rotate: 0deg;
-        }
-        100% {
-          rotate: -180deg;
+ /*Side nav bar*/
+.mobile-side-nav {
+  min-height: 100vh;
+  background: #222222e5;
+  display: flex;
+  flex-direction: column;
+  gap: 87px;
+  z-index: 99999;
+  width: 100vw;
+  padding: 16px;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  animation: slide 0.5s forwards;
+
+  header {
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .mobile-logo {
+      width: 31px;
+      height: 31px;
+
+      .link {
+        width: 31px;
+        height: 31px;
+
+        img {
+          width: inherit;
+          height: inherit;
         }
       }
-      @keyframes rotateDown {
-        0% {
-          rotate: 0deg;
+    }
+    .mobile-menu-bar {
+      width: 31px;
+      height: 31px;
+    }
+  }
+  .nav-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    min-height: 296px;
+    width: 100%;
+
+    .nav-list {
+      width: 259px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .nav-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: #fff;
+          font-family: 'Avenir LT Std';
+          font-size: 20px;
+          font-weight: 600;
+          cursor: pointer;
         }
-        100% {
-          rotate: 180deg;
+
+        .tab {
+          display: flex;
+          flex-direction: column;
+          padding-left: 8px;
+          gap: 8px;
+          left: -100%;
+          animation: slideTab 0.5s forwards;
+
+          .tab-item {
+            font-family: 'Avenir LT Std';
+            font-size: 14px;
+            font-weight: 600;
+          }
         }
       }
-      @keyframes dropDown {
-        0% {
-          margin-top: -10;
-        }
-        100% {
-          margin-top: 0;
-        }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        font-family: 'Avenir LT Std';
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
       }
+    }
+    .nav-button {
+      width: 200px;
+      min-height: 59px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      background: #C5EE4F;
+      font-family: 'Avenir';
+      font-size: 20px;
+      font-weight: bold;
+      color: #00484F;
+      cursor: pointer;
+    }
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slideTab {
+  100% {
+    left: 0;
+  }
+}
+@keyframes moveRight {
+  0% {
+    left: -100px; /* Start off-screen on the left */
+  }
+  100% {
+    left: -100px; /* Back to the starting point */
+  }
+}
