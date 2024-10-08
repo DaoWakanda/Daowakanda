@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
@@ -55,8 +56,19 @@ export function DesktopView() {
               </div>
             </div>
             <div className={styles['bottom']}>
-              <button className={styles['btn-register']}>Register</button>
-              <button className={styles['btn-learn']}>Learn more</button>
+              <Link
+                href="https://algorand.co/hackathon-nigeria?utm_source=x&utm_medium=launch&utm_campaign=hackathon&utm_content=register&utm_term=nigeria"
+                target="blank"
+              >
+                <button className={styles['btn-register']}>Register</button>
+              </Link>
+
+              <Link
+                href="https://algorand.co/faqs-hackathon-nigeria?utm_source=x&utm_medium=launch&utm_campaign=hackathon&utm_content=register&utm_term=nigeria"
+                target="blank"
+              >
+                <button className={styles['btn-learn']}>Learn more</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -110,7 +122,13 @@ export function DesktopView() {
               impactful solutions on Algorand that address regional challenges
               and set the stage for success in the global ecosystem.
             </div>
-            <Link className={styles['get-started']} href={'/'}>
+
+            <Link
+              className={styles['get-started']}
+              href={
+                'https://algorand.co/hackathon-nigeria?utm_source=x&utm_medium=launch&utm_campaign=hackathon&utm_content=register&utm_term=nigeria'
+              }
+            >
               Get started <MdArrowOutward className={styles['icon']} />
             </Link>
           </div>
