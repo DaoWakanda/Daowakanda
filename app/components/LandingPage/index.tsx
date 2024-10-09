@@ -267,7 +267,7 @@ export function LandingPage() {
             </div>
           </div>
         )}
-        <Link className={styles['notice']} href={'/hackathon'}>
+        <Link className={styles['notice']} href={'/hackathon'} target="blank">
           <div className={styles['text']}>
             2024 Algorand Regional Hackathon ~~~
           </div>
@@ -418,9 +418,9 @@ export function LandingPage() {
             <Link href="https://medium.com/@daowakanda/introducing-the-daowakanda-testnet-claim-your-free-nft-and-engage-in-governance-682156156d2e">
               <BlogCard
                 image="https://res.cloudinary.com/dlinprg6k/image/upload/v1720618394/faucetImage_f5szql.webp"
-                topic="   Introducing the DaoWakanda Testnet: Claim Your Free NFT and Engage in Governance"
+                topic="Introducing the DaoWakanda Testnet: Claim Your Free NFT and Engage in Governance"
                 name="Daowakanda"
-                date="July 08, 2024"
+                date="July 10, 2024"
               />
             </Link>
             <BlogCard
@@ -458,7 +458,7 @@ export function LandingPage() {
             image="https://res.cloudinary.com/dlinprg6k/image/upload/v1710000290/Github_svg_1_fmlif0.png"
             topic="Github"
             text="Follow us"
-            address="https://github.com/digichains/wakandaV3"
+            address="https://github.com/DaoWakanda/Daowakanda"
           />
           <CommunityCard
             image="https://res.cloudinary.com/dlinprg6k/image/upload/v1710000327/Group_1_ni3ph6.png"
@@ -512,7 +512,7 @@ export function LandingPage() {
               <FaXTwitter className={styles['icon']} /> Twitter
             </Link>
             <Link
-              href={'https://github.com/digichains/wakandaV3'}
+              href={'https://github.com/DaoWakanda/Daowakanda'}
               className={styles['item']}
             >
               <FaGithub className={styles['icon']} /> Github
