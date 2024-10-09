@@ -269,16 +269,16 @@ export function LandingPage() {
         )}
         <Link className={styles['notice']} href={'/hackathon'}>
           <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~ Coming soon ~~~
+            2024 Algorand Regional Hackathon ~~~
           </div>
           <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~ Coming soon ~~~
+            2024 Algorand Regional Hackathon ~~~
           </div>
           <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~ Coming soon ~~~
+            2024 Algorand Regional Hackathon ~~~
           </div>
           <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~ Coming soon ~~~
+            2024 Algorand Regional Hackathon ~~~
           </div>
         </Link>
         <div className={styles['lead-section']}>
@@ -376,7 +376,7 @@ export function LandingPage() {
               title="Vote"
               step="Step 3"
               image="https://res.cloudinary.com/dkuwhyun7/image/upload/v1709861972/blockchain-07_ipjgzd.png"
-              description="You may now vote during proposals. Your voice matters in the community. Your are one of us, vote wisely."
+              description="You may now vote during proposals. Your voice matters in the community. You are one of us, vote wisely."
             />
           </div>
         </div>
@@ -407,18 +407,22 @@ export function LandingPage() {
             </Link>
           </div>
           <div className={styles['cards']}>
-            <BlogCard
-              image="https://res.cloudinary.com/dlinprg6k/image/upload/v1709953978/wakanda-warrior_ofvi8k.jpg"
-              topic="Daowakanda: Pioneering Community Engagement and Participation on the Algorand Blockchain"
-              name="Daowakanda"
-              date="July 09, 2024"
-            />
-            <BlogCard
-              image="https://res.cloudinary.com/dlinprg6k/image/upload/v1709953981/frame76_hdefkt.jpg"
-              topic="NFT Launch"
-              name="micah tom"
-              date="December 31 , 2023"
-            />
+            <Link href="https://medium.com/@daowakanda/daowakanda-pioneering-community-engagement-and-participation-on-the-algorand-blockchain-782012f1cbbb">
+              <BlogCard
+                image="https://res.cloudinary.com/dlinprg6k/image/upload/v1709953978/wakanda-warrior_ofvi8k.jpg"
+                topic="Daowakanda: Pioneering Community Engagement and Participation on the Algorand Blockchain"
+                name="Daowakanda"
+                date="July 09, 2024"
+              />
+            </Link>
+            <Link href="https://medium.com/@daowakanda/introducing-the-daowakanda-testnet-claim-your-free-nft-and-engage-in-governance-682156156d2e">
+              <BlogCard
+                image="https://res.cloudinary.com/dlinprg6k/image/upload/v1720618394/faucetImage_f5szql.webp"
+                topic="   Introducing the DaoWakanda Testnet: Claim Your Free NFT and Engage in Governance"
+                name="Daowakanda"
+                date="July 08, 2024"
+              />
+            </Link>
             <BlogCard
               image="https://res.cloudinary.com/dlinprg6k/image/upload/v1709953979/Frame77_kazdet.png"
               topic="Game night"
