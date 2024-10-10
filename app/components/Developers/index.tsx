@@ -17,6 +17,7 @@ import { FiFacebook } from 'react-icons/fi';
 import { TopSection } from './TopSection';
 import { MainSection } from './MainSection';
 import { SearchSection } from './SearchSection';
+import { EditProfileModal } from './EditProfileModal';
 
 export function DevelopersPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -26,6 +27,7 @@ export function DevelopersPage() {
   const [dropDownActive, setDropDownActive] = useState(false);
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
+  const [editProfileModal, setEditProfileModal] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
   const isMobile = width ? width < 768 : false;
@@ -88,6 +90,12 @@ export function DevelopersPage() {
         <ConnectWalletModal
           isActive={activeAddress ? false : true}
           onclick={clearConnectModal}
+        />
+      )}
+      {editProfileModal && (
+        <EditProfileModal
+          isActive={activeAddress ? false : true}
+          onclick={()=>setEditProfileModal(false)}
         />
       )}
 
@@ -299,7 +307,7 @@ export function DevelopersPage() {
                 </>
               )}
             </div>
-            <IoIosArrowDown className={styles['profile-dropdown']}/>
+            <IoIosArrowDown className={styles['profile-dropdown']} onClick={()=>setEditProfileModal(!editProfileModal)}/>
           </div>
         
         </div>

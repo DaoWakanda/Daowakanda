@@ -14,6 +14,7 @@ import { RiTwitterXLine } from 'react-icons/ri';
 import { PiDiscordLogo, PiTelegramLogo } from 'react-icons/pi';
 import { FiFacebook } from 'react-icons/fi';
 import { MainSection } from './MainSection';
+import { EditProfileModal } from '../EditProfileModal';
 
 
 export function DeveloperDetailsPage() {
@@ -24,6 +25,7 @@ export function DeveloperDetailsPage() {
   const [dropDownActive, setDropDownActive] = useState(false);
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
+  const [editProfileModal, setEditProfileModal] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
   const isMobile = width ? width < 768 : false;
@@ -79,7 +81,12 @@ export function DeveloperDetailsPage() {
           onclick={clearConnectModal}
         />
       )}
-
+       {editProfileModal && (
+        <EditProfileModal
+          isActive={activeAddress ? false : true}
+          onclick={()=>setEditProfileModal(false)}
+        />
+      )}
       {isMobile ? (
         <div className={styles['mobile-header']}>
           <div className={styles['mobile-logo']}>
@@ -288,7 +295,7 @@ export function DeveloperDetailsPage() {
                 </>
               )}
             </div>
-            <IoIosArrowDown className={styles['profile-dropdown']}/>
+            <IoIosArrowDown className={styles['profile-dropdown']} onClick={()=>setEditProfileModal(!editProfileModal)}/>
           </div>
         
         </div>
