@@ -1,0 +1,377 @@
+@import '../../../../styles/index.scss';
+
+.main-container{
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  margin-top: 100px;
+  padding: 15px 32px;
+  gap: 24px;
+}
+
+.left-section{
+  display: flex;
+  flex-direction: column;
+  width: 326px;
+  min-height: 600px;
+  border-color: #1C1B1C;
+  border-radius: 16px;
+  padding: 16px;
+  gap: 30px;
+  margin-top: 50px;
+
+  .card-detail-filter{
+    background: #211F26;
+    width: 294px;
+    min-height: 500px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+
+    .top-content{
+      border-bottom: 1px solid #484646;
+      display: flex;
+      min-height: 56px;
+      padding: 16px;
+      gap: 8px;
+
+      .lead-text{
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 14px;
+        color: #fff;
+      }
+
+    }
+
+    .level{
+      display: flex;
+      padding: 19px 0 32px 18px;
+      flex-direction: column;
+      gap: 16px;
+      font-family: 'Roboto';
+
+      .title{
+        font-weight: 400;
+        color: #fff;
+        font-size: 14px;
+      }
+      .options{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-height: 88px;
+
+        .option{
+          display: flex;
+          gap: 8px;
+          height: 24px;
+
+          .text{
+            font-weight: 400;
+            font-size: 14px;
+            color:#919094;
+          }
+          .unchecked, .checked{
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+          }
+          .checked{
+            background: #1C1B1C;
+          }
+        }
+      }
+    }
+
+    .bottom{
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 244px;
+      width: 100%;
+      font-family: 'Roboto';
+      padding: 19px 0 32px 18px;
+
+      .title{
+        font-weight: 400;
+        font-size: 14px;
+        color: #fff;
+      }
+
+      .skills{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .skill, .active{
+          background: #1B1B1F;
+          border-radius: 32px;
+          padding: 8px 16px;
+          min-height: 40px;
+          font-weight: 400;
+          font-size: 14px;
+          color: #46464A;
+          text-transform: capitalize;
+          cursor: pointer;
+        }
+        .active{
+          background: #939090;
+          color: #30303D;
+        }
+      }
+    }
+  }
+
+  .card-detail{
+    background: #211F26;
+    width: 294px;
+    min-height: 500px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+
+    .top-content{
+      border-bottom: 1px solid #484646;
+      display: flex;
+      min-height: 56px;
+      padding: 16px;
+      gap: 30px;
+
+      .lead-text{
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 14px;
+        color: #fff;
+      }
+    }
+    .table{
+      display: flex;
+      flex-direction: column;
+
+      .header{
+        background: #2E2D3580;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 36px;
+        border-radius: 8px;
+        padding: 8px;
+        font-family: 'Roboto';
+
+        .title{
+          font-weight: 400;
+          font-size: 14px;
+          color: #8E8E93;
+        }
+      }
+      .content{
+        display: flex;
+        flex-direction: column;
+        min-height: 322px;
+        padding: 0 8px;
+        gap: 8px;
+
+        .row{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 25px;
+          font-family: 'Roboto';
+          width: 100%;
+          padding: 8px 0;
+
+          .left{
+            display: flex;
+            gap: 8px;
+            height: 25px;
+
+            .id{
+              color: #fff;
+              font-size: 14px;
+              font-weight: 400;
+            }
+            .block{
+              display: flex;
+              gap: 4px;
+
+              img{
+                width: 25px;
+                height: 25px;
+                border-radius: 50px;
+              }
+              .name{
+                color: #fff;
+                font-size: 14px;
+                font-weight: 400;
+              }
+            }
+          }
+          .right{
+            color: #fff;
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
+      .link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 20px;
+        color: #C5EE4F;
+        font-weight: 400;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.right-section{
+  display: flex;
+  width: 75%;
+  min-height: 100vh;
+  gap: 16px;
+  flex-direction: column;
+
+  .title{
+    color: #FFFFFF;
+    font-size: 28px;
+    font-family: 'Roboto';
+    font-weight: 700;
+  }
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    .card-container{
+      grid-column: auto;
+      display: flex;
+      min-height: 300px;
+      border-radius: 16px;
+      gap: 0px;
+      flex-direction: column;
+      background: #D1D1D6;
+      border-radius: 16px;
+
+      .title{
+        background: #D1D1D6;
+        height: 40px;
+        color: #46464A;
+        font-size: 14px;
+        text-transform: capitalize;
+        font-weight: 700;
+        font-family: 'Roboto';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+      }
+      .inner-section{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: #211F26;
+        border-radius: 16px;
+        padding: 10px 20px;
+        height: 100%;
+        width: 100%;
+
+        .top{
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          .content{
+            display: flex;
+            flex-direction: column;
+            font-family: 'Roboto';
+            gap: 4px;
+
+            .title-content{
+              color: #F2F2F7;
+              font-size: 24px;
+              font-weight: 700;
+            }
+
+            .info{
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              .date, .time{
+                color: #8E8E93;
+                font-size: 14px;
+                font-weight: 600;
+                display: flex;
+                gap: 2px;
+                align-items: center;
+              }
+              .novice ,.pro, .amateur{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2px 8px;
+                border-radius: 8px;
+                background: #FFCC0033;
+                color: #FFCC00;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: capitalize;
+              }
+              .novice{
+                background: #34C75933;
+                color: #34C759!important;
+              }
+              .pro{
+                background: #FF3B3033;
+                color: #FF3B30!important;
+              }
+            }
+          }
+
+          .paragraph{
+            font-size: 16px;
+            line-height: 24px;
+            color: #D1D1D6;
+            font-family: 'Roboto';
+            font-weight: 400;
+          }
+        }
+        .bottom{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-family: 'Roboto';
+          color: #fff;
+
+          .price{
+           font-size: 16px;
+           font-weight: 600;
+
+           span{
+            font-weight: 400;
+           }
+          }
+          .dotted{
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #D9D9D9;
+          }
+          .max{
+            font-size: 16px;
+            font-weight: 500;
+
+          }
+        }
+      }
+    }
+  }
+}
