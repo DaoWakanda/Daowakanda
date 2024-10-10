@@ -1,0 +1,43 @@
+@import '../../../../styles/index.scss';
+
+.container{
+  display: flex;
+  height: 60px;
+  width: 100%;
+  margin: 70px 0;
+  padding: 15px 32px;
+  align-items: center;
+  justify-content: center;
+
+  .inner-container{
+    width: 910px;
+    height: 60px;
+    border-radius: 32px;
+    position: relative;
+
+    .input{
+      width: 910px;
+      height: 60px;
+      border: 1px solid #8E8E93;
+      background-color: #1B1B1F;
+      padding: 8px 16px;
+      padding-left: 35px !important;
+      border-radius: 32px;
+      color: #46464A;
+      font-weight: 400;
+      font-size: 16px;
+      font-family: 'Roboto';
+      outline: none;
+    }
+    .icon{
+      width: 20px;
+      height: 20px;
+      color: #46464A;
+      cursor: pointer;
+      position: absolute;
+      left: 5px;
+      top: 35%;
+    }
+  }
+
+}
