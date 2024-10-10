@@ -1,1 +1,1 @@
-// export * from './convertEnumToArray';
+export * from './generate-query-from-object';
