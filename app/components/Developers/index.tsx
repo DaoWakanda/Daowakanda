@@ -87,9 +87,7 @@ export function DevelopersPage() {
   ];
 
   useEffect(() => {
-    if (activeAddress) {
-      getDeveloperDetails(activeAddress);
-    }
+    getDeveloperDetails(activeAddress || '');
   }, [activeAddress]);
 
   return (

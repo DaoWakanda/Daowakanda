@@ -12,6 +12,7 @@ export interface ICreateDeveloperDto {
 }
 
 export interface IDeveloper {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -20,6 +21,7 @@ export interface IDeveloper {
   stateOfResidence: string;
   githubLink: string;
   walletAddress: string;
+  awardedAlgos: number;
 }
 
 export interface IUpdateDeveloperDto {
@@ -54,6 +56,8 @@ export type ITriviaRes = Pagination<ITrivia>;
 export interface FetchTriviaDto {
   page?: number;
   numOfItemsPerPage?: number;
+  filterBy?: TriviaDifficulty;
+  searchTerm?: string;
 }
 
 export interface SubmitTriviaAnswer {

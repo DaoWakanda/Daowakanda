@@ -70,6 +70,8 @@ export const useDeveloperActions = () => {
   };
 
   const getAllTrivia = async (dto: FetchTriviaDto) => {
+    setTrivias(null);
+
     try {
       const query = generateQueryFromObject(dto);
       const url = `user-trivia/all?query=${query}`;

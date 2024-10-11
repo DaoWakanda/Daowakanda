@@ -1,6 +1,6 @@
 @import '../../../../../styles/index.scss';
 
-.main-container{
+.main-container {
   display: flex;
   min-height: 100vh;
   width: 100%;
@@ -11,190 +11,196 @@
   flex-direction: column;
   font-family: 'Roboto';
 
-  .header{
+  .header {
     display: flex;
     gap: 16px;
     min-height: 24px;
     align-items: center;
     cursor: pointer;
 
-    .task{
+    .task {
       font-weight: 500;
       font-size: 16px;
-      color: #8E8E93;
+      color: #8e8e93;
     }
-    .arr{
+    .arr {
       color: #fff;
       font-weight: 700;
       font-size: 16px;
     }
-    .title{
+    .title {
       font-weight: 700;
       font-size: 16px;
       color: #fff;
     }
   }
-  .inner-container{
-
-    .denied{
+  .inner-container {
+    .denied {
       display: flex;
       flex-direction: column;
       gap: 24px;
       border-radius: 16px;
-      background: #211F26;
+      background: #211f26;
       min-height: 100vh;
       padding: 8px 0;
       text-align: center;
 
-      .lead{
+      .lead {
         font-weight: 700;
         font-size: 32px;
-        color: #F2F2F7;
+        color: #f2f2f7;
       }
-      .text{
+      .text {
         font-weight: 400;
         font-size: 22px;
-        color: #D1D1D6;
+        color: #d1d1d6;
       }
-      .link{
+      .link {
         font-weight: 400;
         font-size: 22px;
-        color: #D1D1D6;
+        color: #d1d1d6;
         cursor: pointer;
       }
     }
-    .normal{
+    .normal {
       display: flex;
       flex-direction: column;
       gap: 24px;
       border-radius: 16px;
-      background: #211F26;
-      min-height: 100vh;
+      background: #211f26;
+      // min-height: 100vh;
       padding: 10px 20px;
 
-      .top-section{
+      .top-section {
         display: flex;
         flex-direction: column;
         gap: 16px;
         min-height: 96px;
         font-family: 'Roboto';
 
-        .lead{
-          color: #F2F2F7;
+        .lead {
+          color: #f2f2f7;
           font-size: 32px;
           font-weight: 700;
           height: 40px;
           width: 100%;
         }
 
-        .content{
+        .content {
           display: flex;
           align-items: center;
           justify-content: space-between;
           min-height: 40px;
 
-          .info{
+          .info {
             display: flex;
             align-items: center;
             gap: 16px;
 
-            .date, .time{
-              color: #8E8E93;
+            .date,
+            .time {
+              color: #8e8e93;
               font-size: 16px;
               font-weight: 500;
               display: flex;
               gap: 2px;
               align-items: center;
             }
-            .novice ,.pro, .amateur{
+            .novice,
+            .pro,
+            .amateur {
               display: flex;
               align-items: center;
               justify-content: center;
               padding: 2px 8px;
               border-radius: 8px;
-              background: #FFCC0033;
-              color: #FFCC00;
+              background: #ffcc0033;
+              color: #ffcc00;
               font-size: 16px;
               font-weight: 500;
               text-transform: capitalize;
             }
-            .novice{
-              background: #34C75933;
-              color: #34C759!important;
+            .novice {
+              background: #34c75933;
+              color: #34c759 !important;
             }
-            .pro{
-              background: #FF3B3033;
-              color: #FF3B30!important;
+            .pro {
+              background: #ff3b3033;
+              color: #ff3b30 !important;
             }
           }
-          .bottom{
+          .bottom {
             display: flex;
             align-items: center;
             gap: 10px;
             font-family: 'Roboto';
             color: #fff;
-  
-            .price{
-             font-size: 16px;
-             font-weight: 600;
-  
-             span{
-              font-weight: 400;
-             }
+
+            .price {
+              font-size: 16px;
+              font-weight: 600;
+
+              span {
+                font-weight: 400;
+              }
             }
-            .dotted{
+            .dotted {
               width: 5px;
               height: 5px;
               border-radius: 50%;
-              background: #D9D9D9;
+              background: #d9d9d9;
             }
-            .max{
+            .max {
               font-size: 16px;
               font-weight: 500;
-  
             }
           }
         }
       }
-      .bottom-section{
+      .bottom-section {
         display: flex;
         flex-direction: column;
         gap: 32px;
         font-family: 'Roboto';
         min-height: 512px;
 
-        .text{
+        .text {
           display: flex;
           flex-direction: column;
           width: 100%;
           min-height: 420px;
           font-weight: 400;
           font-size: 22px;
-          color: #D1D1D6;
+          color: #d1d1d6;
           line-height: 28px;
         }
 
-        .form{
+        .form {
           display: flex;
           align-items: center;
           width: 100%;
           min-height: 60px;
           gap: 24px;
+          padding-bottom: 30px;
 
-          .input{
+          .input {
             width: 75%;
             height: 60px;
-            border: 1px solid #8E8E93;
-            background-color: #1B1B1F;
+            border: 1px solid #8e8e93;
+            background-color: #1b1b1f;
             padding: 8px 16px;
             border-radius: 32px;
-            color: #46464A;
+            color: #fff;
             font-weight: 400;
             font-size: 16px;
             outline: none;
+
+            &::placeholder {
+              color: #46464a;
+            }
           }
 
-          .btn{
+          .btn {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -203,9 +209,14 @@
             cursor: pointer;
             border-radius: 32px;
             color: #fff;
-            background: #34C759;
+            background: #34c759;
             font-weight: 400;
             font-size: 16px;
+
+            &:disabled {
+              background: #8e8e93;
+              cursor: not-allowed;
+            }
           }
         }
       }

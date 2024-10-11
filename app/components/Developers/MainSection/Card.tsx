@@ -31,6 +31,7 @@ export function Card({ data }: Props) {
           </div>
           <div className={styles['paragraph']}>{data.description}</div>
         </div>
+        <div style={{ flex: 1 }}></div>
         <div className={styles['bottom']}>
           <div className={styles['price']}>
             Prize: <span>{data.prize} Algos</span>{' '}
@@ -53,34 +54,58 @@ export function CardLoader() {
         <div className={styles['top']}>
           <div className={styles['content']}>
             <div className={styles['title-content']}>
-              <Skeleton width={100} />
+              <Skeleton baseColor="#202020" highlightColor="#444" width={100} />
             </div>
             <div className={styles['info']}>
               <div className={styles['date']}>
                 <RiCalendar2Fill className={styles['icon']} />
-                <Skeleton width={50} />
+                <Skeleton
+                  baseColor="#202020"
+                  highlightColor="#444"
+                  width={50}
+                />
               </div>
               <div className={styles['time']}>
                 <GoStopwatch className={styles['icon']} />
-                <Skeleton width={50} />
+                <Skeleton
+                  baseColor="#202020"
+                  highlightColor="#444"
+                  width={50}
+                />
               </div>
-              <div className={styles['pro']}>{<Skeleton width={50} />}</div>
+              <div className={styles['pro']}>
+                {
+                  <Skeleton
+                    baseColor="#202020"
+                    highlightColor="#444"
+                    width={50}
+                  />
+                }
+              </div>
             </div>
           </div>
           <div className={styles['paragraph']}>
-            {<Skeleton count={3} width={200} />}
+            {
+              <Skeleton
+                baseColor="#202020"
+                highlightColor="#444"
+                count={3}
+                width={200}
+              />
+            }
           </div>
         </div>
         <div className={styles['bottom']}>
           <div className={styles['price']}>
             Prize:{' '}
             <span>
-              <Skeleton width={20} />
+              <Skeleton baseColor="#202020" highlightColor="#444" width={20} />
             </span>{' '}
           </div>
           <div className={styles['dotted']}></div>
           <div className={styles['max']}>
-            Max Winners: <Skeleton width={20} />
+            Max Winners:{' '}
+            <Skeleton baseColor="#202020" highlightColor="#444" width={20} />
           </div>
         </div>
       </div>
