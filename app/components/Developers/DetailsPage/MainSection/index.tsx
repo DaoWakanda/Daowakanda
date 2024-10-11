@@ -1,72 +1,203 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Link from 'next/link';
 import { IoIosArrowForward } from 'react-icons/io';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { GoStopwatch } from 'react-icons/go';
+import { useParams } from 'next/navigation';
+import { useDeveloperActions } from '@/features/developers/actions/developer.action';
+import { ITrivia } from '@/interfaces/developer.interface';
+import Skeleton from 'react-loading-skeleton';
+import { DeveloperProfileAtom } from '@/features/developers/state/developer.atom';
+import { useRecoilValue } from 'recoil';
+import { useWallet } from '@txnlab/use-wallet-react';
+import { useNotify } from '@/hooks';
+import toast from 'react-hot-toast';
 
-interface Props{
-  title: string;
-}
-export function MainSection({title}: Props) {
+export function MainSection() {
+  const developerProfile = useRecoilValue(DeveloperProfileAtom);
+  const [trivia, setTrivia] = useState<ITrivia>();
 
-  const [userAccess, setUserAccess] = useState(true);
+  const { getTriviaById, submitTriviaAnswer } = useDeveloperActions();
+  const { activeAddress } = useWallet();
+  const { notify } = useNotify();
+  const params = useParams();
+  const [githubLink, setGithubLink] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const paragraph = `
-  Figma ipsum component variant main layer. Ipsum arrange hand flatten style. Variant figjam stroke fill underline overflow. Ellipse subtract layer duplicate boolean effect prototype line flatten. Stroke auto vector clip vector bold auto inspect. Layer distribute rotate connection plugin move pixel. Rectangle connection background vertical opacity editor ipsum scrolling create. Library union pen flatten rectangle layout. Text scale scale pixel font main pencil hand. Editor select shadow pencil underline. Variant reesizing link arrange prototype layout.
-  Plugin selection bullet distribute slice scale text. List edit main ellipse rotate layer arrow list variant bullet.
-  
-  Strikethrough select reesizing community share pixel horizontal layer. Plugin figjam group pen rectangle prototype outline prototype rectangle. Bullet connection device undo connection style flatten. Effect team shadow slice thumbnail community reesizing. Plugin italic subtract group inspect. 
-  Auto polygon layer comment vector. Scrolling clip vertical blur inspect project vector select. Thumbnail overflow italic underline underline ipsum. Pencil selection vertical italic scale text. Flatten pixel outline invite subtract ipsum.
-  Duplicate auto rectangle plugin thumbnail follower. Content plugin vector list bullet background asset italic. Selection thumbnail shadow main thumbnail create community bold invite background. Layout device rectangle team editor team. Reesizing content device main edit component. Create ellipse object shadow flows inspect pixel draft scale. Distribute reesizing community font figma. Flows overflow arrange overflow rotate vertical move fill.
-  `
+  const fetchTrivia = async () => {
+    if (!params?.title) return;
+
+    const res = await getTriviaById(params?.title as string);
+
+    if (res) {
+      setTrivia(res);
+    }
+  };
+
+  const makeSubmission = async () => {
+    if (!activeAddress) {
+      notify.error('Please connect your wallet to proceed');
+      return;
+    }
+
+    if (!developerProfile) return;
+
+    setLoading(true);
+    toast.loading('Submitting your response...', { id: 'loader' });
+
+    const res = await submitTriviaAnswer({
+      triviaId: params?.title as string,
+      githubRepoLink: githubLink,
+      userId: developerProfile.id,
+    });
+
+    toast.dismiss('loader');
+    setLoading(false);
+
+    if (res) {
+      notify.success('Your response has been submitted successfully');
+
+      setGithubLink('');
+    }
+  };
+
+  useEffect(() => {
+    fetchTrivia();
+  }, [params]);
 
   return (
     <div className={styles['main-container']}>
       <Link className={styles['header']} href={'/developers'}>
         <div className={styles['task']}>Tasks</div>
-        <IoIosArrowForward className={styles['arr']}/>
-        <div className={styles['title']}>{title}</div>
+        <IoIosArrowForward className={styles['arr']} />
+        <div className={styles['title']}>
+          {trivia?.title || (
+            <Skeleton baseColor="#202020" highlightColor="#444" width={100} />
+          )}
+        </div>
       </Link>
       <div className={styles['inner-container']}>
-        {
-          !userAccess? (
-            <div className={styles['denied']}>
-              <div className={styles['lead']}>Access denied</div>
-              <div className={styles['text']}>Access to this task has been denied, update your profile to gain access.</div>
-              <Link className={styles['link']} href={'/developers/signup'}>Proceed to update KYC</Link>
+        {!developerProfile ? (
+          <div className={styles['denied']}>
+            <div className={styles['lead']}>Access denied</div>
+            <div className={styles['text']}>
+              Access to this task has been denied, update your profile to gain
+              access.
             </div>
-          ): (
-            <div className={styles['normal']}>
-              <div className={styles['top-section']}>
-                <div className={styles['lead']}>{title}</div>
-                <div className={styles['content']}>
-                  <div className={styles['info']}>
-                    <div className={styles['date']}><RiCalendar2Fill className={styles['icon']}/>01 Oct, 2024</div>
-                    <div className={styles['time']}><GoStopwatch className={styles['icon']}/>48 hrs</div>
-                    <div className={styles['amateur']}>amateur</div>
+            <Link className={styles['link']} href={'/developers/signup'}>
+              Proceed to update KYC
+            </Link>
+          </div>
+        ) : (
+          <div className={styles['normal']}>
+            <div className={styles['top-section']}>
+              <div className={styles['lead']}>
+                {trivia?.title || (
+                  <Skeleton
+                    baseColor="#202020"
+                    highlightColor="#444"
+                    width={150}
+                  />
+                )}
+              </div>
+              <div className={styles['content']}>
+                <div className={styles['info']}>
+                  <div className={styles['date']}>
+                    <RiCalendar2Fill className={styles['icon']} />
+                    {trivia ? (
+                      new Date(trivia.createdAt).toDateString()
+                    ) : (
+                      <Skeleton
+                        baseColor="#202020"
+                        highlightColor="#444"
+                        width={50}
+                      />
+                    )}
                   </div>
-                  <div className={styles['bottom']}>
-                    <div className={styles['price']}>Price:<span>50 Algos</span> </div>
-                    <div className={styles['dotted']}></div>
-                    <div className={styles['max']}>Max Winners: 10</div>
+                  <div className={styles['time']}>
+                    <GoStopwatch className={styles['icon']} />
+                    {trivia?.duration || (
+                      <Skeleton
+                        baseColor="#202020"
+                        highlightColor="#444"
+                        width={50}
+                      />
+                    )}
                   </div>
+                  <div className={styles[trivia?.difficulty || 'status']}>
+                    {trivia?.difficulty || (
+                      <Skeleton
+                        baseColor="#202020"
+                        highlightColor="#444"
+                        width={50}
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className={styles['bottom']}>
+                  <div className={styles['price']}>
+                    Price:{' '}
+                    <span>
+                      {trivia ? (
+                        `${trivia.prize} algos`
+                      ) : (
+                        <Skeleton
+                          baseColor="#202020"
+                          highlightColor="#444"
+                          width={100}
+                        />
+                      )}
+                    </span>{' '}
+                  </div>
+                  <div className={styles['dotted']}></div>
+                  <div className={styles['max']}>
+                    Max Winners:{' '}
+                    {trivia?.maxWinners || (
+                      <Skeleton
+                        baseColor="#202020"
+                        highlightColor="#444"
+                        width={100}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                </div>
+            <div className={styles['bottom-section']}>
+              <div className={styles['text']}>
+                {trivia?.description || (
+                  <Skeleton
+                    count={5}
+                    baseColor="#202020"
+                    highlightColor="#444"
+                    width={'100%'}
+                  />
+                )}
               </div>
-              
-              <div className={styles['bottom-section']}>
-                <div className={styles['text']}>{paragraph}</div>
-                <div className={styles['form']}>
-                  <input type="text" className={styles['input']} placeholder='Submit Github Repository link' />
-                  <div className={styles['btn']}>Submit</div>
-                </div>
+              <div className={styles['form']}>
+                <input
+                  type="url"
+                  className={styles['input']}
+                  placeholder="Submit Github Repository link"
+                  value={githubLink}
+                  onChange={(e) => setGithubLink(e.target.value)}
+                  required
+                />
+                <button
+                  disabled={!trivia || !githubLink || loading}
+                  className={styles['btn']}
+                  onClick={makeSubmission}
+                >
+                  Submit
+                </button>
               </div>
             </div>
-          )
-        }
-     </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
