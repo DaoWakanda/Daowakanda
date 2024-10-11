@@ -1,9 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Link from 'next/link';
 import { MdArrowOutward } from 'react-icons/md';
-import { Tables } from './DesktopView/Tables';
+import { Tables } from '../HackathonPage/DesktopView/Tables';
 
 export function MobileView() {
   const steps = [
