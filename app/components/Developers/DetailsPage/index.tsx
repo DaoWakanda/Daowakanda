@@ -15,12 +15,13 @@ import { PiDiscordLogo, PiTelegramLogo } from 'react-icons/pi';
 import { FiFacebook } from 'react-icons/fi';
 import { MainSection } from './MainSection';
 import { EditProfileModal } from '../EditProfileModal';
-
+import { useDeveloperActions } from '@/features/developers/actions/developer.action';
 
 export function DeveloperDetailsPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [activeDropDownTwo, setActiveDropDownTwo] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { getDeveloperDetails } = useDeveloperActions();
   const [openSideNav, setOpenSideNav] = useState(false);
   const [dropDownActive, setDropDownActive] = useState(false);
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
@@ -31,17 +32,6 @@ export function DeveloperDetailsPage() {
   const isMobile = width ? width < 768 : false;
   const { notify } = useNotify();
   const { registerFaucet } = useFaucetActions();
-
-  const router = useRouter();
-
-  // Get the full current URL
-  const currentUrl = `${router.asPath}`;
-  console.log(currentUrl);
-
-  const titleTrim =()=>{
-    const newTitle = currentUrl.split('/')[2].split('_').join(' ');
-    console.log(newTitle);
-  }
 
   const toggleShowDropDown = () => {
     setDropDownActive(true);
@@ -71,7 +61,9 @@ export function DeveloperDetailsPage() {
     }, 1500);
   };
 
-  useEffect(()=> titleTrim(), [])
+  useEffect(() => {
+    getDeveloperDetails(activeAddress || '');
+  }, [activeAddress]);
 
   return (
     <div className={styles.container}>
@@ -81,10 +73,10 @@ export function DeveloperDetailsPage() {
           onclick={clearConnectModal}
         />
       )}
-       {editProfileModal && (
+      {editProfileModal && (
         <EditProfileModal
           isActive={activeAddress ? false : true}
-          onclick={()=>setEditProfileModal(false)}
+          onclick={() => setEditProfileModal(false)}
         />
       )}
       {isMobile ? (
@@ -164,7 +156,7 @@ export function DeveloperDetailsPage() {
                   {/* <Link className={styles['nav-item']} href="/fpl">
                     FPL Tournament
                   </Link> */}
-                   <Link className={styles['nav-item']} href="/developers">
+                  <Link className={styles['nav-item']} href="/developers">
                     AlgoDev
                   </Link>
                 </div>
@@ -266,15 +258,18 @@ export function DeveloperDetailsPage() {
             >
               <Link href="/fpl">FPL Tournament</Link>
             </div> */}
-             <div
+            <div
               className={styles['nav-item']}
               onMouseLeave={() => setActiveDropDownTwo(false)}
             >
-              <Link href="/developers" 
+              <Link
+                href="/developers"
                 style={{
-                  color:  `#fff` ,
+                  color: `#fff`,
                 }}
-              >AlgoDev</Link>
+              >
+                AlgoDev
+              </Link>
             </div>
           </div>
           <div className={styles['end']}>
@@ -290,19 +285,19 @@ export function DeveloperDetailsPage() {
               {activeAddress ? (
                 `${activeAddress.slice(0, 10)}...`
               ) : (
-                <>
-                  Connect Wallet
-                </>
+                <>Connect Wallet</>
               )}
             </div>
-            <IoIosArrowDown className={styles['profile-dropdown']} onClick={()=>setEditProfileModal(!editProfileModal)}/>
+            <IoIosArrowDown
+              className={styles['profile-dropdown']}
+              onClick={() => setEditProfileModal(!editProfileModal)}
+            />
           </div>
-        
         </div>
       )}
 
-     {/*main component*/}
-      <MainSection title={currentUrl.split('/')[2].split('_').join(' ')}/>
+      {/*main component*/}
+      <MainSection />
       {/*Footer Ends*/}
       <div className={styles['footer']}>
         <div className={styles['contain']}>

@@ -14,10 +14,10 @@
 
   .notice{
     display: flex;
-    gap: 10px;
+    gap: 120px;
     padding: 8px 16px;
     background: #403f3d;
-    height: 40px;
+    height: 80px;
     width: 100%;
     position: fixed;
     left: 0;
@@ -25,6 +25,10 @@
     top: 80px;
     overflow: hidden;
     overscroll-behavior: smooth;
+
+    @include tablet {
+      height: 40px;
+    }
 
     .text{
       color: #C5EE4F;
@@ -654,13 +658,13 @@
 
         img {
           width: 125px;
-          min-height: 125px;
+          min-height: 150px;
           border-top-left-radius: 32px;
           border-bottom-left-radius: 32px;
 
           @include tablet {
             width: 30%;
-            height: 100%;
+            min-height: 290px;
           }
         }
 
