@@ -16,6 +16,7 @@ import { FiFacebook } from 'react-icons/fi';
 import { MainSection } from './MainSection';
 import { EditProfileModal } from '../EditProfileModal';
 import { useDeveloperActions } from '@/features/developers/actions/developer.action';
+import { EditProfileForm } from '../EditProfileForm';
 
 export function DeveloperDetailsPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -27,6 +28,7 @@ export function DeveloperDetailsPage() {
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [editProfileForm, setEditProfileForm] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
   const isMobile = width ? width < 768 : false;
@@ -73,10 +75,24 @@ export function DeveloperDetailsPage() {
           onclick={clearConnectModal}
         />
       )}
+      {editProfileForm && (
+        <EditProfileForm
+          isActive={true}
+          onclick={() => { 
+            setEditProfileForm(false);
+            setEditProfileModal(false);
+          }
+        }
+        />
+      )}
       {editProfileModal && (
         <EditProfileModal
-          isActive={activeAddress ? false : true}
+          isActive={true}
           onclick={() => setEditProfileModal(false)}
+          showEditForm={()=>{
+            setEditProfileForm(true);
+            setEditProfileModal(false);
+          }}
         />
       )}
       {isMobile ? (

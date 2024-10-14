@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.scss';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { RightBackgroundOverlay } from '@/components/shared/BackgroundOverlay/RightBackgroundOverlay';
@@ -9,9 +9,10 @@ import { DeveloperProfileAtom } from '@/features/developers/state/developer.atom
 interface Props {
   isActive: boolean;
   onclick: () => any;
+  showEditForm: () => any;
 }
 
-export function EditProfileModal({ isActive, onclick }: Props) {
+export function EditProfileModal({ isActive, onclick, showEditForm }: Props) {
   const { activeAddress } = useWallet();
   const developerProfile = useRecoilValue(DeveloperProfileAtom);
 
@@ -35,7 +36,7 @@ export function EditProfileModal({ isActive, onclick }: Props) {
               <div
                 className={styles['btn']}
                 onClick={() => {
-                  // Open modal for editing user profile and close this one
+                  showEditForm();
                 }}
               >
                 Edit Profile

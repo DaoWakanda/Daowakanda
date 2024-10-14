@@ -11,6 +11,8 @@
   align-items: center;
   justify-content: center;
   font-family: 'Inter';
+  overflow: auto;
+  background: #1e1e1ecc;
 
   .overlay {
     display: flex;
