@@ -19,6 +19,7 @@ import { MainSection } from './MainSection';
 import { SearchSection } from './SearchSection';
 import { EditProfileModal } from './EditProfileModal';
 import { useDeveloperActions } from '@/features/developers/actions/developer.action';
+import { EditProfileForm } from './EditProfileForm';
 
 export function DevelopersPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -29,6 +30,7 @@ export function DevelopersPage() {
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [editProfileForm, setEditProfileForm] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
   const isMobile = width ? width < 768 : false;
@@ -68,23 +70,6 @@ export function DevelopersPage() {
     }, 1500);
   };
 
-  const fplData = [
-    {
-      id: 1,
-      position: '🥇1st Position',
-      amount: 1000,
-    },
-    {
-      id: 2,
-      position: '🥈2nd Position',
-      amount: 500,
-    },
-    {
-      id: 3,
-      position: '🥉3nd Position',
-      amount: 300,
-    },
-  ];
 
   useEffect(() => {
     getDeveloperDetails(activeAddress || '');
@@ -98,12 +83,27 @@ export function DevelopersPage() {
           onclick={clearConnectModal}
         />
       )}
+      {editProfileForm && (
+        <EditProfileForm
+          isActive={true}
+          onclick={() => { 
+            setEditProfileForm(false);
+            setEditProfileModal(false);
+          }
+        }
+        />
+      )}
       {editProfileModal && (
         <EditProfileModal
           isActive={true}
           onclick={() => setEditProfileModal(false)}
+          showEditForm={()=>{
+            setEditProfileForm(true);
+            setEditProfileModal(false);
+          }}
         />
       )}
+   
 
       {isMobile ? (
         <div className={styles['mobile-header']}>
