@@ -1,6 +1,6 @@
 @import '../../../../styles/index.scss';
 
-.wrapper {
+.wrapper, .wrapper-right {
   position: fixed;
   top: 0;
   left: 0;
@@ -28,4 +28,10 @@
   div {
     transform: translateX(0.01px);
   }
+}
+
+.wrapper-right{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
