@@ -18,6 +18,8 @@ import { TopSection } from './TopSection';
 import { MainSection } from './MainSection';
 import { SearchSection } from './SearchSection';
 import { EditProfileModal } from './EditProfileModal';
+import { useDeveloperActions } from '@/features/developers/actions/developer.action';
+import { EditProfileForm } from './EditProfileForm';
 
 export function DevelopersPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -28,10 +30,12 @@ export function DevelopersPage() {
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [editProfileForm, setEditProfileForm] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
   const isMobile = width ? width < 768 : false;
   const { notify } = useNotify();
+  const { getDeveloperDetails } = useDeveloperActions();
   const { registerFaucet } = useFaucetActions();
   const router = useRouter();
 
@@ -66,23 +70,10 @@ export function DevelopersPage() {
     }, 1500);
   };
 
-  const fplData = [
-    {
-      id: 1,
-      position: '🥇1st Position',
-      amount: 1000,
-    },
-    {
-      id: 2,
-      position: '🥈2nd Position',
-      amount: 500,
-    },
-    {
-      id: 3,
-      position: '🥉3nd Position',
-      amount: 300,
-    },
-  ];
+
+  useEffect(() => {
+    getDeveloperDetails(activeAddress || '');
+  }, [activeAddress]);
 
   return (
     <div className={styles.container}>
@@ -92,12 +83,27 @@ export function DevelopersPage() {
           onclick={clearConnectModal}
         />
       )}
-      {editProfileModal && (
-        <EditProfileModal
-          isActive={activeAddress ? false : true}
-          onclick={()=>setEditProfileModal(false)}
+      {editProfileForm && (
+        <EditProfileForm
+          isActive={true}
+          onclick={() => { 
+            setEditProfileForm(false);
+            setEditProfileModal(false);
+          }
+        }
         />
       )}
+      {editProfileModal && (
+        <EditProfileModal
+          isActive={true}
+          onclick={() => setEditProfileModal(false)}
+          showEditForm={()=>{
+            setEditProfileForm(true);
+            setEditProfileModal(false);
+          }}
+        />
+      )}
+   
 
       {isMobile ? (
         <div className={styles['mobile-header']}>
@@ -176,7 +182,7 @@ export function DevelopersPage() {
                   {/* <Link className={styles['nav-item']} href="/fpl">
                     FPL Tournament
                   </Link> */}
-                   <Link className={styles['nav-item']} href="/developers">
+                  <Link className={styles['nav-item']} href="/developers">
                     AlgoDev
                   </Link>
                 </div>
@@ -278,15 +284,18 @@ export function DevelopersPage() {
             >
               <Link href="/fpl">FPL Tournament</Link>
             </div> */}
-             <div
+            <div
               className={styles['nav-item']}
               onMouseLeave={() => setActiveDropDownTwo(false)}
             >
-              <Link href="/developers" 
+              <Link
+                href="/developers"
                 style={{
                   color: currentUrl == `/developers` ? `#fff` : `#757575`,
                 }}
-              >AlgoDev</Link>
+              >
+                AlgoDev
+              </Link>
             </div>
           </div>
           <div className={styles['end']}>
@@ -302,14 +311,20 @@ export function DevelopersPage() {
               {activeAddress ? (
                 `${activeAddress.slice(0, 10)}...`
               ) : (
-                <>
-                  Connect Wallet
-                </>
+                <>Connect Wallet</>
               )}
             </div>
-            <IoIosArrowDown className={styles['profile-dropdown']} onClick={()=>setEditProfileModal(!editProfileModal)}/>
+            <IoIosArrowDown
+              className={styles['profile-dropdown']}
+              onClick={() => {
+                if (!activeAddress) {
+                  toggleConnectWallet();
+                  return;
+                }
+                setEditProfileModal(true);
+              }}
+            />
           </div>
-        
         </div>
       )}
 

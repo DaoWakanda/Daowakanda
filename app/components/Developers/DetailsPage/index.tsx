@@ -15,32 +15,25 @@ import { PiDiscordLogo, PiTelegramLogo } from 'react-icons/pi';
 import { FiFacebook } from 'react-icons/fi';
 import { MainSection } from './MainSection';
 import { EditProfileModal } from '../EditProfileModal';
+import { useDeveloperActions } from '@/features/developers/actions/developer.action';
+import { EditProfileForm } from '../EditProfileForm';
 
 export function DeveloperDetailsPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [activeDropDownTwo, setActiveDropDownTwo] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { getDeveloperDetails } = useDeveloperActions();
   const [openSideNav, setOpenSideNav] = useState(false);
   const [dropDownActive, setDropDownActive] = useState(false);
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [editProfileForm, setEditProfileForm] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
   const isMobile = width ? width < 768 : false;
   const { notify } = useNotify();
   const { registerFaucet } = useFaucetActions();
-
-  const router = useRouter();
-
-  // Get the full current URL
-  const currentUrl = `${router.asPath}`;
-  console.log(currentUrl);
-
-  const titleTrim = () => {
-    const newTitle = currentUrl.split('/')[2].split('_').join(' ');
-    console.log(newTitle);
-  };
 
   const toggleShowDropDown = () => {
     setDropDownActive(true);
@@ -70,7 +63,9 @@ export function DeveloperDetailsPage() {
     }, 1500);
   };
 
-  useEffect(() => titleTrim(), []);
+  useEffect(() => {
+    getDeveloperDetails(activeAddress || '');
+  }, [activeAddress]);
 
   return (
     <div className={styles.container}>
@@ -80,10 +75,23 @@ export function DeveloperDetailsPage() {
           onclick={clearConnectModal}
         />
       )}
+      {editProfileForm && (
+        <EditProfileForm
+          isActive={true}
+          onclick={() => {
+            setEditProfileForm(false);
+            setEditProfileModal(false);
+          }}
+        />
+      )}
       {editProfileModal && (
         <EditProfileModal
-          isActive={activeAddress ? false : true}
+          isActive={true}
           onclick={() => setEditProfileModal(false)}
+          showEditForm={() => {
+            setEditProfileForm(true);
+            setEditProfileModal(false);
+          }}
         />
       )}
       {isMobile ? (
@@ -304,7 +312,7 @@ export function DeveloperDetailsPage() {
       )}
 
       {/*main component*/}
-      <MainSection title={currentUrl.split('/')[2].split('_').join(' ')} />
+      <MainSection />
       {/*Footer Ends*/}
       <div className={styles['footer']}>
         <div className={styles['contain']}>

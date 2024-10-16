@@ -1,6 +1,6 @@
 @import '../../../../styles/index.scss';
 
-.container{
+.container {
   display: flex;
   height: 60px;
   width: 100%;
@@ -9,35 +9,34 @@
   align-items: center;
   justify-content: center;
 
-  .inner-container{
+  .inner-container {
     width: 910px;
     height: 60px;
     border-radius: 32px;
     position: relative;
 
-    .input{
+    .input {
       width: 910px;
       height: 60px;
-      border: 1px solid #8E8E93;
-      background-color: #1B1B1F;
+      border: 1px solid #8e8e93;
+      background-color: #1b1b1f;
       padding: 8px 16px;
       padding-left: 35px !important;
       border-radius: 32px;
-      color: #46464A;
+      color: #fff;
       font-weight: 400;
       font-size: 16px;
       font-family: 'Roboto';
       outline: none;
     }
-    .icon{
+    .icon {
       width: 20px;
       height: 20px;
-      color: #46464A;
+      color: #46464a;
       cursor: pointer;
       position: absolute;
       left: 5px;
       top: 35%;
     }
   }
-
 }
