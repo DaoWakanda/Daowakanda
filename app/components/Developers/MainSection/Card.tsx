@@ -5,11 +5,38 @@ import { GoStopwatch } from 'react-icons/go';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { ITrivia } from '@/interfaces/developer.interface';
 import Skeleton from 'react-loading-skeleton';
+import { useEffect, useState } from 'react';
 
 interface Props {
   data: ITrivia;
 }
 export function Card({ data }: Props) {
+  const [timeLeft, setTimeLeft] = useState<string>("00:00:00");
+
+  useEffect(() => {
+
+    const updateTimer = () => {
+      const currentTime = Math.floor(Date.now() / 1000);
+      const difference = (data?.endTimeStamp / 1000) - currentTime;
+  
+      if (difference > 0) {
+        const hours = Math.floor(difference / 3600);
+        const minutes = Math.floor((difference % 3600) / 60);
+        const seconds = difference % 60;
+  
+        const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        setTimeLeft(formattedTime);
+      } else {
+        setTimeLeft("00:00:00");
+      }
+    };
+    
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(timerInterval);
+  }, [data?.endTimeStamp]);
+
   return (
     <Link className={styles['card-container']} href={`/developers/${data.id}`}>
       <div className={styles['title']}>{data.skill}</div>
@@ -24,7 +51,7 @@ export function Card({ data }: Props) {
               </div>
               <div className={styles['time']}>
                 <GoStopwatch className={styles['icon']} />
-                {data.duration}
+                {data.status === 'expired' ? 'Ended' : timeLeft}
               </div>
               <div className={styles[data.difficulty]}>{data.difficulty}</div>
             </div>
