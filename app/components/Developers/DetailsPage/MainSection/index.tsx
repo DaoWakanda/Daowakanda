@@ -255,7 +255,7 @@ export function MainSection() {
       </div>
 
     {
-      trivia?.status === 'expired' && (
+      developerProfile && trivia?.status === 'expired' && (
         <div className={styles['winners']}>
           <div className={styles['top-content']}>
             <img
