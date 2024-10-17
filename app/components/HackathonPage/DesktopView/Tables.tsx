@@ -36,16 +36,19 @@ export function Tables() {
 
   const Dates = [
     {
-      firstSection: ['Registration Opens:', 'September 15th'],
-      secondSection: ['Hacking Window:', 'October 1st - November 2nd'],
+      firstSection: [
+        'Registration Opens:',
+        'September 25th - October 31st,2024',
+      ],
+      secondSection: ['Hacking Window:', 'October 8th - November 8th,2024'],
     },
     {
-      firstSection: ['Submission Window:', 'October 8th - October 15th'],
-      secondSection: ['Shortlisting Phase:', 'October 15th - October 20th'],
+      firstSection: ['Submission Window:', 'November 1 - November 8th,2024'],
+      secondSection: ['Shortlisting Phase:', 'November 1 - November 8th,2024'],
     },
     {
-      firstSection: ['Shortlist Result Announcement:', 'October 21st'],
-      secondSection: ['Final Demo Date:', 'October 26th (IRL)'],
+      firstSection: ['Shortlist Result Announcement:', 'November 8th'],
+      secondSection: ['Final Demo Date:', 'November 8th and 9th (IRL)'],
     },
   ];
 
