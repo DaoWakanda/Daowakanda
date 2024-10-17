@@ -56,6 +56,7 @@ export function MainSection() {
     debounceSearch(searchTerm);
   }, [searchTerm]);
 
+  console.log(trivias);
   return (
     <div className={styles['main-container']}>
       <div className={styles['left-section']}>
