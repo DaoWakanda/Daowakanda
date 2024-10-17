@@ -179,10 +179,10 @@ export function DesktopView() {
             collaborators.
           </div>
           <div className={styles['card']}>
-            The winners of the regional hackathons will go directly to the last
-            round of judging for the next Global hackathon, providing you with
-            another opportunity to secure prize money and gain great exposure
-            for your project.
+            In addition to the vatious prizes, a select few projects will be
+            invited to join the next Algorand incubator cohort. The Algorand
+            Incubator is an eight-week program designed to help you validate
+            your ideas and prepare your team for rapid scaling.
           </div>
         </div>
       </div>

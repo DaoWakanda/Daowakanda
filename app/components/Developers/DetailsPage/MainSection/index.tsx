@@ -22,7 +22,7 @@ export function MainSection() {
 
   const { fetchLeaderboard } = useDeveloperActions();
   const [leaderboardItems, setLeaderboardItems] = useState<LeaderBoardItem[]>();
-  
+
   const { getTriviaById, submitTriviaAnswer } = useDeveloperActions();
   const { activeAddress } = useWallet();
   const { notify } = useNotify();
@@ -79,7 +79,6 @@ export function MainSection() {
     getLeaderboard();
   }, []);
 
-
   useEffect(() => {
     fetchTrivia();
   }, [params]);
@@ -102,7 +101,10 @@ export function MainSection() {
           {!developerProfile ? (
             <div className={styles['denied']}>
               <div className={styles['denied-icon']}>
-                <img src="https://res.cloudinary.com/dlinprg6k/image/upload/v1729017655/Frame_1_rjgjqb.png" alt="icon" />
+                <img
+                  src="https://res.cloudinary.com/dlinprg6k/image/upload/v1729017655/Frame_1_rjgjqb.png"
+                  alt="icon"
+                />
               </div>
               <div className={styles['lead']}>Access denied</div>
               <div className={styles['text']}>
@@ -200,35 +202,32 @@ export function MainSection() {
                     />
                   )}
                 </div>
-                {
-                  trivia?.status !== 'expired' && (
-                    <div className={styles['form']}>
-                      <input
-                        type="url"
-                        className={styles['input']}
-                        placeholder="Submit Github Repository link"
-                        value={githubLink}
-                        onChange={(e) => setGithubLink(e.target.value)}
-                        required
-                      />
-                      <button
-                        disabled={!trivia || !githubLink || loading}
-                        className={styles['btn']}
-                        onClick={makeSubmission}
-                      >
-                        Submit
-                      </button>
+                {trivia?.status !== 'expired' && (
+                  <div className={styles['form']}>
+                    <input
+                      type="url"
+                      className={styles['input']}
+                      placeholder="Submit Github Repository link"
+                      value={githubLink}
+                      onChange={(e) => setGithubLink(e.target.value)}
+                      required
+                    />
+                    <button
+                      disabled={!trivia || !githubLink || loading}
+                      className={styles['btn']}
+                      onClick={makeSubmission}
+                    >
+                      Submit
+                    </button>
                   </div>
-                  )
-                }        
+                )}
               </div>
             </div>
           )}
         </div>
       </div>
 
-    {
-      trivia?.status === 'expired' && (
+      {trivia?.status === 'expired' && (
         <div className={styles['winners']}>
           <div className={styles['top-content']}>
             <img
@@ -244,13 +243,13 @@ export function MainSection() {
             </div>
             <div className={styles['content']}>
               {leaderboardItems?.map((item, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <LeaderBoardComponent item={item} index={index} />
               ))}
             </div>
           </div>
         </div>
-      )
-    }
+      )}
     </>
   );
 }
