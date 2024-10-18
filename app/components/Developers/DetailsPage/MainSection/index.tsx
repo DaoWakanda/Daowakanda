@@ -19,7 +19,7 @@ import { LeaderBoardComponent } from '../../MainSection/LeaderBoardItem';
 export function MainSection() {
   const developerProfile = useRecoilValue(DeveloperProfileAtom);
   const [trivia, setTrivia] = useState<ITrivia>();
-  const [timeLeft, setTimeLeft] = useState<string>("00:00:00");
+  const [timeLeft, setTimeLeft] = useState<string>('00:00:00');
 
   const { fetchLeaderboard } = useDeveloperActions();
   const [leaderboardItems, setLeaderboardItems] = useState<LeaderBoardItem[]>();
@@ -85,23 +85,24 @@ export function MainSection() {
   }, [params]);
 
   useEffect(() => {
-
     const updateTimer = () => {
       const currentTime = Math.floor(Date.now() / 1000);
-      const difference = (Number(trivia?.endTimeStamp) / 1000) - currentTime;
+      const difference = Number(trivia?.endTimeStamp) / 1000 - currentTime;
 
       if (difference > 0) {
         const hours = Math.floor(difference / 3600);
         const minutes = Math.floor((difference % 3600) / 60);
         const seconds = difference % 60;
-  
-        const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        const formattedTime = `${String(hours).padStart(2, '0')}:${String(
+          minutes,
+        ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         setTimeLeft(formattedTime);
       } else {
-        setTimeLeft("00:00:00");
+        setTimeLeft('00:00:00');
       }
     };
-    
+
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
@@ -166,17 +167,17 @@ export function MainSection() {
                     </div>
                     <div className={styles['time']}>
                       <GoStopwatch className={styles['icon']} />
-                      {
-                        loading ? (
-                          <Skeleton
-                            baseColor="#202020"
-                            highlightColor="#444"
-                            width={50}
-                          />
-                        ):(
-                           trivia?.status === 'expired' ? 'Ended' : timeLeft
-                        )
-                      }
+                      {loading ? (
+                        <Skeleton
+                          baseColor="#202020"
+                          highlightColor="#444"
+                          width={50}
+                        />
+                      ) : trivia?.status === 'expired' ? (
+                        'Ended'
+                      ) : (
+                        timeLeft
+                      )}
                     </div>
                     <div className={styles[trivia?.difficulty || 'status']}>
                       {trivia?.difficulty || (
