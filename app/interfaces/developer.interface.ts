@@ -49,6 +49,7 @@ export interface ITrivia {
   skill: string;
   createdAt: string;
   status: TriviaStatus;
+  endTimeStamp: number;
 }
 
 export type ITriviaRes = Pagination<ITrivia>;
