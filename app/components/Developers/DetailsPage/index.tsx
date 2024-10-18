@@ -78,18 +78,17 @@ export function DeveloperDetailsPage() {
       {editProfileForm && (
         <EditProfileForm
           isActive={true}
-          onclick={() => { 
+          onclick={() => {
             setEditProfileForm(false);
             setEditProfileModal(false);
-          }
-        }
+          }}
         />
       )}
       {editProfileModal && (
         <EditProfileModal
           isActive={true}
           onclick={() => setEditProfileModal(false)}
-          showEditForm={()=>{
+          showEditForm={() => {
             setEditProfileForm(true);
             setEditProfileModal(false);
           }}
