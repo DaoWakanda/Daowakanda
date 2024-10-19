@@ -162,11 +162,11 @@ export function GovernPage() {
                       </div>
                     )}
                   </div>
-                  <Link className={styles['nav-item']} href="/about">
-                    About
-                  </Link>
                   <Link className={styles['nav-item']} href="/developers">
                     AlgoDev
+                  </Link>
+                  <Link className={styles['nav-item']} href="/about">
+                    About
                   </Link>
 
                   {/* <Link className={styles['nav-item']} href="/faucet">
@@ -275,10 +275,10 @@ export function GovernPage() {
               onMouseLeave={() => setActiveDropDownTwo(false)}
             >
               <Link
-                href="/about"
+                href="/developers"
                 style={{ color: currentUrl == `/about` ? `#fff` : `#757575` }}
               >
-                about
+                AlgoDev
               </Link>
             </div>
             <div
@@ -286,10 +286,10 @@ export function GovernPage() {
               onMouseLeave={() => setActiveDropDownTwo(false)}
             >
               <Link
-                href="/developers"
+                href="/about"
                 style={{ color: currentUrl == `/about` ? `#fff` : `#757575` }}
               >
-                AlgoDev
+                about
               </Link>
             </div>
             {/* <div

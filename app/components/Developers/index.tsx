@@ -70,7 +70,6 @@ export function DevelopersPage() {
     }, 1500);
   };
 
-
   useEffect(() => {
     getDeveloperDetails(activeAddress || '');
   }, [activeAddress]);
@@ -86,24 +85,22 @@ export function DevelopersPage() {
       {editProfileForm && (
         <EditProfileForm
           isActive={true}
-          onclick={() => { 
+          onclick={() => {
             setEditProfileForm(false);
             setEditProfileModal(false);
-          }
-        }
+          }}
         />
       )}
       {editProfileModal && (
         <EditProfileModal
           isActive={true}
           onclick={() => setEditProfileModal(false)}
-          showEditForm={()=>{
+          showEditForm={() => {
             setEditProfileForm(true);
             setEditProfileModal(false);
           }}
         />
       )}
-   
 
       {isMobile ? (
         <div className={styles['mobile-header']}>
@@ -173,6 +170,9 @@ export function DevelopersPage() {
                       </div>
                     )}
                   </div>
+                  <Link className={styles['nav-item']} href="/developers">
+                    AlgoDev
+                  </Link>
                   <Link className={styles['nav-item']} href="/about">
                     About
                   </Link>
@@ -182,9 +182,6 @@ export function DevelopersPage() {
                   {/* <Link className={styles['nav-item']} href="/fpl">
                     FPL Tournament
                   </Link> */}
-                  <Link className={styles['nav-item']} href="/developers">
-                    AlgoDev
-                  </Link>
                 </div>
                 <div
                   className={styles['nav-button']}
@@ -266,12 +263,7 @@ export function DevelopersPage() {
                 </div>
               )}
             </div>
-            <div
-              className={styles['nav-item']}
-              onMouseLeave={() => setActiveDropDownTwo(false)}
-            >
-              <Link href="/about">about</Link>
-            </div>
+
             {/* <div
               className={styles['nav-item']}
               onMouseLeave={() => setActiveDropDownTwo(false)}
@@ -296,6 +288,12 @@ export function DevelopersPage() {
               >
                 AlgoDev
               </Link>
+            </div>
+            <div
+              className={styles['nav-item']}
+              onMouseLeave={() => setActiveDropDownTwo(false)}
+            >
+              <Link href="/about">about</Link>
             </div>
           </div>
           <div className={styles['end']}>
@@ -336,7 +334,7 @@ export function DevelopersPage() {
       <div className={styles['footer']}>
         <div className={styles['contain']}>
           <div className={styles['left']}>
-            Buit with <FaHeart className={styles['icon']} /> at{' '}
+            Built with <FaHeart className={styles['icon']} /> at{' '}
             <div className={styles['dao']}>DAO WAKANDA</div>
           </div>
           <div className={styles['right']}>

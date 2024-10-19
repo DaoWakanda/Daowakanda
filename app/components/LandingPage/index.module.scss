@@ -14,11 +14,11 @@
 
   .notice{
     display: flex;
-    gap: 120px;
+    gap: 30px;
     padding: 8px 16px;
     background: #403f3d;
     height: 80px;
-    width: 100%;
+    width: 100%; 
     position: fixed;
     left: 0;
     right: 0;
@@ -27,7 +27,7 @@
     overscroll-behavior: smooth;
 
     @include tablet {
-      height: 40px;
+      height: 40px;   
     }
 
     .text{
