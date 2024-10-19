@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Link from 'next/link';
 import { MdArrowOutward } from 'react-icons/md';
-import { Tables } from './Tables';
+import { Tables } from '../HackathonPage/DesktopView/Tables';
 
-export function DesktopView() {
+export function MobileView() {
   const steps = [
     {
       id: 1,
@@ -56,19 +56,8 @@ export function DesktopView() {
               </div>
             </div>
             <div className={styles['bottom']}>
-              <Link
-                href="https://algorand.co/hackathon-nigeria?utm_source=x&utm_medium=launch&utm_campaign=hackathon&utm_content=register&utm_term=nigeria"
-                target="blank"
-              >
-                <button className={styles['btn-register']}>Register</button>
-              </Link>
-
-              <Link
-                href="https://algorand.co/faqs-hackathon-nigeria?utm_source=x&utm_medium=launch&utm_campaign=hackathon&utm_content=register&utm_term=nigeria"
-                target="blank"
-              >
-                <button className={styles['btn-learn']}>Learn more</button>
-              </Link>
+              <button className={styles['btn-register']}>Register</button>
+              <button className={styles['btn-learn']}>Learn more</button>
             </div>
           </div>
         </div>
@@ -122,13 +111,7 @@ export function DesktopView() {
               impactful solutions on Algorand that address regional challenges
               and set the stage for success in the global ecosystem.
             </div>
-
-            <Link
-              className={styles['get-started']}
-              href={
-                'https://algorand.co/hackathon-nigeria?utm_source=x&utm_medium=launch&utm_campaign=hackathon&utm_content=register&utm_term=nigeria'
-              }
-            >
+            <Link className={styles['get-started']} href={'/'}>
               Get started <MdArrowOutward className={styles['icon']} />
             </Link>
           </div>
@@ -179,10 +162,10 @@ export function DesktopView() {
             collaborators.
           </div>
           <div className={styles['card']}>
-            In addition to the vatious prizes, a select few projects will be
-            invited to join the next Algorand incubator cohort. The Algorand
-            Incubator is an eight-week program designed to help you validate
-            your ideas and prepare your team for rapid scaling.
+            The winners of the regional hackathons will go directly to the last
+            round of judging for the next Global hackathon, providing you with
+            another opportunity to secure prize money and gain great exposure
+            for your project.
           </div>
         </div>
       </div>

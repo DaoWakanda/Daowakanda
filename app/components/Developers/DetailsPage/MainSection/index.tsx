@@ -19,11 +19,11 @@ import { LeaderBoardComponent } from '../../MainSection/LeaderBoardItem';
 export function MainSection() {
   const developerProfile = useRecoilValue(DeveloperProfileAtom);
   const [trivia, setTrivia] = useState<ITrivia>();
-  const [timeLeft, setTimeLeft] = useState<string>("00:00:00");
+  const [timeLeft, setTimeLeft] = useState<string>('00:00:00');
 
   const { fetchLeaderboard } = useDeveloperActions();
   const [leaderboardItems, setLeaderboardItems] = useState<LeaderBoardItem[]>();
-  
+
   const { getTriviaById, submitTriviaAnswer } = useDeveloperActions();
   const { activeAddress } = useWallet();
   const { notify } = useNotify();
@@ -80,29 +80,29 @@ export function MainSection() {
     getLeaderboard();
   }, []);
 
-
   useEffect(() => {
     fetchTrivia();
   }, [params]);
 
   useEffect(() => {
-
     const updateTimer = () => {
       const currentTime = Math.floor(Date.now() / 1000);
-      const difference = (Number(trivia?.endTimeStamp) / 1000) - currentTime;
+      const difference = Number(trivia?.endTimeStamp) / 1000 - currentTime;
 
       if (difference > 0) {
         const hours = Math.floor(difference / 3600);
         const minutes = Math.floor((difference % 3600) / 60);
         const seconds = difference % 60;
-  
-        const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        const formattedTime = `${String(hours).padStart(2, '0')}:${String(
+          minutes,
+        ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         setTimeLeft(formattedTime);
       } else {
-        setTimeLeft("00:00:00");
+        setTimeLeft('00:00:00');
       }
     };
-    
+
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
@@ -125,7 +125,10 @@ export function MainSection() {
           {!developerProfile ? (
             <div className={styles['denied']}>
               <div className={styles['denied-icon']}>
-                <img src="https://res.cloudinary.com/dlinprg6k/image/upload/v1729017655/Frame_1_rjgjqb.png" alt="icon" />
+                <img
+                  src="https://res.cloudinary.com/dlinprg6k/image/upload/v1729017655/Frame_1_rjgjqb.png"
+                  alt="icon"
+                />
               </div>
               <div className={styles['lead']}>Access denied</div>
               <div className={styles['text']}>
@@ -164,17 +167,17 @@ export function MainSection() {
                     </div>
                     <div className={styles['time']}>
                       <GoStopwatch className={styles['icon']} />
-                      {
-                        loading ? (
-                          <Skeleton
-                            baseColor="#202020"
-                            highlightColor="#444"
-                            width={50}
-                          />
-                        ):(
-                           trivia?.status === 'expired' ? 'Ended' : timeLeft
-                        )
-                      }
+                      {loading ? (
+                        <Skeleton
+                          baseColor="#202020"
+                          highlightColor="#444"
+                          width={50}
+                        />
+                      ) : trivia?.status === 'expired' ? (
+                        'Ended'
+                      ) : (
+                        timeLeft
+                      )}
                     </div>
                     <div className={styles[trivia?.difficulty || 'status']}>
                       {trivia?.difficulty || (
@@ -227,35 +230,32 @@ export function MainSection() {
                     />
                   )}
                 </div>
-                {
-                  trivia?.status !== 'expired' && (
-                    <div className={styles['form']}>
-                      <input
-                        type="url"
-                        className={styles['input']}
-                        placeholder="Submit Github Repository link"
-                        value={githubLink}
-                        onChange={(e) => setGithubLink(e.target.value)}
-                        required
-                      />
-                      <button
-                        disabled={!trivia || !githubLink || loading}
-                        className={styles['btn']}
-                        onClick={makeSubmission}
-                      >
-                        Submit
-                      </button>
+                {trivia?.status !== 'expired' && (
+                  <div className={styles['form']}>
+                    <input
+                      type="url"
+                      className={styles['input']}
+                      placeholder="Submit Github Repository link"
+                      value={githubLink}
+                      onChange={(e) => setGithubLink(e.target.value)}
+                      required
+                    />
+                    <button
+                      disabled={!trivia || !githubLink || loading}
+                      className={styles['btn']}
+                      onClick={makeSubmission}
+                    >
+                      Submit
+                    </button>
                   </div>
-                  )
-                }        
+                )}
               </div>
             </div>
           )}
         </div>
       </div>
 
-    {
-      developerProfile && trivia?.status === 'expired' && (
+      {developerProfile && trivia?.status === 'expired' && (
         <div className={styles['winners']}>
           <div className={styles['top-content']}>
             <img
@@ -271,13 +271,13 @@ export function MainSection() {
             </div>
             <div className={styles['content']}>
               {leaderboardItems?.map((item, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <LeaderBoardComponent item={item} index={index} />
               ))}
             </div>
           </div>
         </div>
-      )
-    }
+      )}
     </>
   );
 }

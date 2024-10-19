@@ -18,7 +18,7 @@ interface Props {
 export function EditProfileForm({ isActive, onclick }: Props) {
   const { activeAddress } = useWallet();
   const [loading, setLoading] = useState(false);
-  const { updateDeveloperDetails} = useDeveloperActions();
+  const { updateDeveloperDetails } = useDeveloperActions();
   const { push } = useRouter();
   const [data, setData] = useState<IUpdateDeveloperDto>({
     firstName: '',
@@ -60,101 +60,101 @@ export function EditProfileForm({ isActive, onclick }: Props) {
     }
   };
 
-
   return (
     <>
       <RightBackgroundOverlay visible={isActive} onClose={onclick}>
-       
-          <div className={styles['left-section']}>
-            <div className={styles['avatar']}>
-              <img src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728892838/Rectangle_1_t6a9fx.png" alt="avatar" className={styles['img']}/>
+        <div className={styles['left-section']}>
+          <div className={styles['avatar']}>
+            <img
+              src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728892838/Rectangle_1_t6a9fx.png"
+              alt="avatar"
+              className={styles['img']}
+            />
+          </div>
+          <div className={styles['form']}>
+            <div className={styles['input']}>
+              <label>First name:</label>
+              <input
+                onChange={(evt) => {
+                  onChange('firstName', evt.target.value);
+                }}
+                value={data.firstName}
+                type="text"
+                placeholder="First Name"
+                required
+              />
             </div>
-            <div className={styles['form']}>
-              <div className={styles['input']}>
-                <label>First name:</label>
-                <input
-                  onChange={(evt) => {
-                    onChange('firstName', evt.target.value);
-                  }}
-                  value={data.firstName}
-                  type="text"
-                  placeholder="First Name"
-                  required
-                />
-              </div>
-              <div className={styles['input']}>
-                <label>Last name:</label>
-                <input
-                  onChange={(evt) => {
-                    onChange('lastName', evt.target.value);
-                  }}
-                  value={data.lastName}
-                  type="text"
-                  placeholder="Last Name"
-                  required
-                />
-              </div>
-              <div className={styles['input']}>
-                <label>Country:</label>
-                <input
-                  onChange={(evt) => {
-                    onChange('country', evt.target.value);
-                  }}
-                  value={data.country}
-                  type="text"
-                  placeholder="Type your Country"
-                  required
-                />
-              </div>
-              <div className={styles['input']}>
-                <label>State of Residence:</label>
-                <input
-                  onChange={(evt) => {
-                    onChange('stateOfResidence', evt.target.value);
-                  }}
-                  value={data.stateOfResidence}
-                  type="text"
-                  placeholder="Select State"
-                  required
-                />
-              </div>
-              <div className={styles['input-long']}>
-                <label>Github Link:</label>
-                <input
-                  onChange={(evt) => {
-                    onChange('githubLink', evt.target.value);
-                  }}
-                  value={data.githubLink}
-                  type="text"
-                  placeholder="Github Link"
-                  required
-                />
-              </div>
-              <div className={styles['input-long']}>
-                <label>Wallet Address:</label>
-                <input
-                  type="text"
-                  placeholder="Wallet address"
-                  value={data.walletAddress}
-                  required
-                />
-              </div>
+            <div className={styles['input']}>
+              <label>Last name:</label>
+              <input
+                onChange={(evt) => {
+                  onChange('lastName', evt.target.value);
+                }}
+                value={data.lastName}
+                type="text"
+                placeholder="Last Name"
+                required
+              />
             </div>
-            <div className={styles['btns']}>
-              <button className={styles['btn-cancel']} 
-                onClick={()=> onclick()}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => onSubmit()}
-                disabled={!canSubmit || loading}
-                className={styles['btn-proceed']}
-              >
-                Save Changes
-              </button>
+            <div className={styles['input']}>
+              <label>Country:</label>
+              <input
+                onChange={(evt) => {
+                  onChange('country', evt.target.value);
+                }}
+                value={data.country}
+                type="text"
+                placeholder="Type your Country"
+                required
+              />
+            </div>
+            <div className={styles['input']}>
+              <label>State of Residence:</label>
+              <input
+                onChange={(evt) => {
+                  onChange('stateOfResidence', evt.target.value);
+                }}
+                value={data.stateOfResidence}
+                type="text"
+                placeholder="Select State"
+                required
+              />
+            </div>
+            <div className={styles['input-long']}>
+              <label>Github Link:</label>
+              <input
+                onChange={(evt) => {
+                  onChange('githubLink', evt.target.value);
+                }}
+                value={data.githubLink}
+                type="text"
+                placeholder="Github Link"
+                required
+              />
+            </div>
+            <div className={styles['input-long']}>
+              <label>Wallet Address:</label>
+              <input
+                type="text"
+                placeholder="Wallet address"
+                value={data.walletAddress}
+                required
+              />
             </div>
           </div>
+          <div className={styles['btns']}>
+            <button className={styles['btn-cancel']} onClick={() => onclick()}>
+              Cancel
+            </button>
+            <button
+              onClick={() => onSubmit()}
+              disabled={!canSubmit || loading}
+              className={styles['btn-proceed']}
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
       </RightBackgroundOverlay>
     </>
   );

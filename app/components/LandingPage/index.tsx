@@ -136,11 +136,11 @@ export function LandingPage() {
                         </div>
                       )}
                     </div>
-                    <Link className={styles['nav-item']} href="/about">
-                      About
-                    </Link>
                     <Link className={styles['nav-item']} href="/developers">
                       AlgoDev
+                    </Link>
+                    <Link className={styles['nav-item']} href="/about">
+                      About
                     </Link>
                     {/* <Link className={styles['nav-item']} href="/faucet">
                       Faucet
@@ -232,13 +232,13 @@ export function LandingPage() {
                 className={styles['nav-item']}
                 onMouseLeave={() => setActiveDropDownTwo(false)}
               >
-                <Link href="/about">about</Link>
+                <Link href="/developers">AlgoDev</Link>
               </div>
               <div
                 className={styles['nav-item']}
                 onMouseLeave={() => setActiveDropDownTwo(false)}
               >
-                <Link href="/developers">AlgoDev</Link>
+                <Link href="/about">about</Link>
               </div>
               {/* <div
                 className={styles['nav-item']}
