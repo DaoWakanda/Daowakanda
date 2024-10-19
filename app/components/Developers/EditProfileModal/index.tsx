@@ -21,7 +21,12 @@ export function EditProfileModal({ isActive, onclick, showEditForm }: Props) {
       <RightBackgroundOverlay visible={isActive} onClose={onclick}>
         <div className={styles['card']}>
           <img
-            src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728521810/Frame_144_ufboki.png"
+            src={
+              developerProfile?.image ||
+              `https://ui-avatars.com/api/?name=${
+                developerProfile?.firstName || 'u'
+              }&background=121212&size=80&rounded=true&bold=true&color=f5f5f5`
+            }
             alt="avatar"
           />
           <div className={styles['section']}>

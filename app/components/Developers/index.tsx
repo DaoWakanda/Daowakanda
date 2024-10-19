@@ -334,7 +334,7 @@ export function DevelopersPage() {
       <div className={styles['footer']}>
         <div className={styles['contain']}>
           <div className={styles['left']}>
-            Buit with <FaHeart className={styles['icon']} /> at{' '}
+            Built with <FaHeart className={styles['icon']} /> at{' '}
             <div className={styles['dao']}>DAO WAKANDA</div>
           </div>
           <div className={styles['right']}>

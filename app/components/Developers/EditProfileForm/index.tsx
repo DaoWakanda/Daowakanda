@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './index.module.scss';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { RightBackgroundOverlay } from '@/components/shared/BackgroundOverlay/RightBackgroundOverlay';
@@ -16,9 +16,10 @@ interface Props {
 }
 
 export function EditProfileForm({ isActive, onclick }: Props) {
+  const developerProfile = useRecoilValue(DeveloperProfileAtom);
   const { activeAddress } = useWallet();
   const [loading, setLoading] = useState(false);
-  const { updateDeveloperDetails } = useDeveloperActions();
+  const { updateDeveloperDetails, getDeveloperDetails } = useDeveloperActions();
   const { push } = useRouter();
   const [data, setData] = useState<IUpdateDeveloperDto>({
     firstName: '',
@@ -33,7 +34,9 @@ export function EditProfileForm({ isActive, onclick }: Props) {
     setData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const canSubmit = Object.keys(data).every((key) => !!(data as any)[key]);
+  const canSubmit = Object.keys(data)
+    .filter((key) => key !== 'walletAddress')
+    .some((key) => !!(data as any)[key]);
 
   const onSubmit = async () => {
     if (loading) return;
@@ -45,6 +48,7 @@ export function EditProfileForm({ isActive, onclick }: Props) {
 
     if (response) {
       toast.success('Details submitted successfully');
+      getDeveloperDetails(data.walletAddress);
 
       setTimeout(() => {
         setData({
@@ -56,6 +60,7 @@ export function EditProfileForm({ isActive, onclick }: Props) {
           walletAddress: activeAddress || '',
         });
         push('/developers');
+        onclick();
       }, 2000);
     }
   };
@@ -66,7 +71,12 @@ export function EditProfileForm({ isActive, onclick }: Props) {
         <div className={styles['left-section']}>
           <div className={styles['avatar']}>
             <img
-              src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728892838/Rectangle_1_t6a9fx.png"
+              src={
+                developerProfile?.image ||
+                `https://ui-avatars.com/api/?name=${
+                  developerProfile?.firstName || 'u'
+                }&background=ebebeb&size=80&rounded=true&bold=true`
+              }
               alt="avatar"
               className={styles['img']}
             />
@@ -80,7 +90,7 @@ export function EditProfileForm({ isActive, onclick }: Props) {
                 }}
                 value={data.firstName}
                 type="text"
-                placeholder="First Name"
+                placeholder={developerProfile?.firstName || 'First Name'}
                 required
               />
             </div>
@@ -92,7 +102,7 @@ export function EditProfileForm({ isActive, onclick }: Props) {
                 }}
                 value={data.lastName}
                 type="text"
-                placeholder="Last Name"
+                placeholder={developerProfile?.lastName || 'Last Name'}
                 required
               />
             </div>
@@ -104,7 +114,7 @@ export function EditProfileForm({ isActive, onclick }: Props) {
                 }}
                 value={data.country}
                 type="text"
-                placeholder="Type your Country"
+                placeholder={developerProfile?.country || 'Type your Country'}
                 required
               />
             </div>
@@ -116,7 +126,10 @@ export function EditProfileForm({ isActive, onclick }: Props) {
                 }}
                 value={data.stateOfResidence}
                 type="text"
-                placeholder="Select State"
+                placeholder={
+                  developerProfile?.stateOfResidence ||
+                  'Type your State or province'
+                }
                 required
               />
             </div>
@@ -128,7 +141,7 @@ export function EditProfileForm({ isActive, onclick }: Props) {
                 }}
                 value={data.githubLink}
                 type="text"
-                placeholder="Github Link"
+                placeholder={developerProfile?.githubLink || 'Github Link'}
                 required
               />
             </div>
