@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { RightBackgroundOverlay } from '@/components/shared/BackgroundOverlay/RightBackgroundOverlay';
-import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import { DeveloperProfileAtom } from '@/features/developers/state/developer.atom';
 import { IUpdateDeveloperDto } from '@/interfaces/developer.interface';
@@ -19,24 +18,32 @@ export function EditProfileForm({ isActive, onclick }: Props) {
   const developerProfile = useRecoilValue(DeveloperProfileAtom);
   const { activeAddress } = useWallet();
   const [loading, setLoading] = useState(false);
-  const { updateDeveloperDetails, getDeveloperDetails } = useDeveloperActions();
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const { updateDeveloperDetails, getDeveloperDetails, uploadImage } =
+    useDeveloperActions();
+  const [touched, setTouched] = useState(false);
+  const [imageInputActive, setImageInputActive] = useState(true);
   const { push } = useRouter();
+
   const [data, setData] = useState<IUpdateDeveloperDto>({
-    firstName: '',
-    lastName: '',
-    country: '',
-    stateOfResidence: '',
-    githubLink: '',
+    firstName: developerProfile?.firstName || '',
+    lastName: developerProfile?.lastName || '',
+    country: developerProfile?.country || '',
+    stateOfResidence: developerProfile?.stateOfResidence || '',
+    githubLink: developerProfile?.githubLink || '',
     walletAddress: activeAddress || '',
   });
 
   const onChange = (key: keyof IUpdateDeveloperDto, value: string) => {
     setData((prev) => ({ ...prev, [key]: value }));
+    setTouched(true);
   };
 
-  const canSubmit = Object.keys(data)
-    .filter((key) => key !== 'walletAddress')
-    .some((key) => !!(data as any)[key]);
+  const canSubmit =
+    touched &&
+    Object.keys(data)
+      .filter((key) => key !== 'walletAddress')
+      .every((key) => !!(data as any)[key]);
 
   const onSubmit = async () => {
     if (loading) return;
@@ -60,16 +67,79 @@ export function EditProfileForm({ isActive, onclick }: Props) {
           walletAddress: activeAddress || '',
         });
         push('/developers');
+        setTouched(false);
         onclick();
       }, 2000);
     }
   };
 
+  const onImageSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : undefined;
+
+    if (!file) return;
+
+    const SIZE_LIMIT = 2 * 1024 * 1024; //2mb
+    const { size } = file;
+
+    if (size > SIZE_LIMIT) {
+      toast.success(
+        `The size of the image you want to upload is ${(size / 1000000).toFixed(
+          2,
+        )}mb. Please upload an image not bigger than 2mb in size.`,
+      );
+      return;
+    }
+
+    const fileReader = new FileReader();
+    setImageInputActive(false);
+
+    fileReader.onloadend = (event) => {
+      if (event.target?.result) {
+        const base64 = (event.target.result as string).split(',')[1];
+        submitImage(base64);
+      }
+    };
+
+    fileReader.readAsDataURL(file);
+  };
+
+  const submitImage = async (base64: string) => {
+    toast.loading('Uploading image...', { id: 'image-upload-toast' });
+
+    const response = await uploadImage(base64, developerProfile?.id || '');
+
+    setImageInputActive(true);
+    toast.dismiss('image-upload-toast');
+
+    if (response) {
+      toast.success('Your profile photo was updated successfully');
+      getDeveloperDetails(data.walletAddress);
+    }
+  };
+
+  useEffect(() => {
+    setData({
+      firstName: developerProfile?.firstName || '',
+      lastName: developerProfile?.lastName || '',
+      country: developerProfile?.country || '',
+      stateOfResidence: developerProfile?.stateOfResidence || '',
+      githubLink: developerProfile?.githubLink || '',
+      walletAddress: activeAddress || '',
+    });
+  }, [developerProfile]);
+
   return (
     <>
       <RightBackgroundOverlay visible={isActive} onClose={onclick}>
         <div className={styles['left-section']}>
-          <div className={styles['avatar']}>
+          <div
+            className={styles['avatar']}
+            onClick={() => {
+              if (imageInputActive) {
+                imageInputRef.current?.click();
+              }
+            }}
+          >
             <img
               src={
                 developerProfile?.image ||
@@ -79,6 +149,14 @@ export function EditProfileForm({ isActive, onclick }: Props) {
               }
               alt="avatar"
               className={styles['img']}
+            />
+            <input
+              type={'file'}
+              className="hidden"
+              ref={imageInputRef}
+              accept="image/*"
+              onChange={onImageSelect}
+              value={undefined}
             />
           </div>
           <div className={styles['form']}>

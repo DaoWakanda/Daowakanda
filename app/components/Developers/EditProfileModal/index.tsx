@@ -28,6 +28,7 @@ export function EditProfileModal({ isActive, onclick, showEditForm }: Props) {
               }&background=121212&size=80&rounded=true&bold=true&color=f5f5f5`
             }
             alt="avatar"
+            style={{ objectFit: 'cover' }}
           />
           <div className={styles['section']}>
             <div className={styles['title']}>
