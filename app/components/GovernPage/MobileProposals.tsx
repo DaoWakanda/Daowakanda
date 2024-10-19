@@ -7,7 +7,7 @@ import { MdOutlineNoteAdd } from 'react-icons/md';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { SampleProposal } from '@/interfaces';
 import { proposalsData } from './mock';
-import { CardProposal } from './CardProposal';
+import { CardProposal, CardProposalLoader } from './CardProposal';
 import { useProposalActions } from '@/features/governance/actions/proposal.action';
 
 interface MobileProposalProps {
@@ -22,18 +22,7 @@ export const MobileProposals = ({ openProposalModal }: MobileProposalProps) => {
   const { getAllProposals } = useProposalActions();
   const proposals = useRecoilValue(ProposalContractsAtom);
   const { activeAddress } = useWallet();
-  const [proposalList, setProposalList] =
-    useState<SampleProposal[]>(proposalsData);
 
-  const filterProposals = () => {
-    if (searchTerm) {
-      return [...proposals].filter((proposal) =>
-        proposal.title.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    }
-
-    return [...proposals];
-  };
   useEffect(() => {
     getAllProposals();
   }, []);
@@ -140,7 +129,13 @@ export const MobileProposals = ({ openProposalModal }: MobileProposalProps) => {
           </div>
         )}
       </div>
-      <div className={styles['main-section']}>{proposalFilters()}</div>
+      <div className={styles['main-section']}>
+        {proposalFilters()}
+        {!proposalsData &&
+          Array.from({ length: 5 }).map((_, index) => (
+            <CardProposalLoader key={index} />
+          ))}
+      </div>
     </div>
   );
 };

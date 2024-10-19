@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './index.module.scss';
 import { IProposalContract } from '@/interfaces/proposal.interface';
+import Skeleton from 'react-loading-skeleton';
 
 interface CardProps {
   data: IProposalContract;
@@ -81,6 +82,59 @@ export const CardProposal = ({ data }: CardProps) => {
           <div className={styles['votes']}>
             Total Votes:
             <span>{yesVote + noVote}</span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export const CardProposalLoader = () => {
+  return (
+    <Link className={styles['proposal-card']} href={`#`}>
+      <div className={styles['Active']}>
+        <div className={styles['status']}>
+          <Skeleton />
+        </div>
+        <div className={styles['endtime']}>
+          <Skeleton />
+        </div>
+      </div>
+      <div className={styles['title-content']}>
+        <div className={styles['title']}>
+          <Skeleton width={50} />
+        </div>
+        <div className={styles['tag']}>{`Voting Tag: #0`}</div>
+      </div>
+      <div className={styles['texts']}>{<Skeleton width={150} />}</div>
+      <div className={styles['bottom-content']}>
+        <div className={styles['top-section']}>
+          <div className={styles['yes-no-block']}>
+            <span>{`Yes(0%)`}</span>
+            <span>{`No(0%)`}</span>
+          </div>
+          <div className={styles['vote-line']}>
+            <div
+              className={styles['inner-line']}
+              style={{
+                width: `50%`,
+              }}
+            ></div>
+          </div>
+        </div>
+        <div className={styles['statistics']}>
+          <div className={styles['address']}>
+            <Skeleton width={50} />
+            <img
+              src="https://res.cloudinary.com/dlinprg6k/image/upload/v1725207509/Frame_144_e7mnip.png"
+              alt="icon"
+            />
+          </div>
+          <div className={styles['votes']}>
+            Total Votes:
+            <span>
+              <Skeleton width={50} />
+            </span>
           </div>
         </div>
       </div>
