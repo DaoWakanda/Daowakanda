@@ -22,7 +22,7 @@ export function Card({ data }: Props) {
       if (difference > 0) {
         const hours = Math.floor(difference / 3600);
         const minutes = Math.floor((difference % 3600) / 60);
-        const seconds = difference % 60;
+        const seconds = Math.floor(difference % 60);
   
         const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         setTimeLeft(formattedTime);
