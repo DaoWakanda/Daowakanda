@@ -245,7 +245,7 @@
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 400px));
     gap: 24px;
 
     .card-container {
@@ -345,6 +345,12 @@
             color: #d1d1d6;
             font-family: 'Roboto';
             font-weight: 400;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            align-self: stretch;
+            overflow: hidden;
           }
         }
         .bottom {
