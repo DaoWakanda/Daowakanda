@@ -192,7 +192,7 @@ export function MainSection() {
                   </div>
                   <div className={styles['bottom']}>
                     <div className={styles['price']}>
-                      Price:{' '}
+                      Prize:{' '}
                       <span>
                         {trivia ? (
                           `${trivia.prize} algos`
