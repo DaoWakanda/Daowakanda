@@ -276,20 +276,29 @@ export function LandingPage() {
             </div>
           </div>
         )}
-        <Link className={styles['notice']} href={'/hackathon'} target="blank">
-          <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~
-          </div>
-          <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~
-          </div>
-          <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~
-          </div>
-          <div className={styles['text']}>
-            2024 Algorand Regional Hackathon ~~~
-          </div>
+        <Link className={styles['notice']} href={'/hackathon'} target="_blank">
+          {isMobile ? (
+            <div className={styles['text']}>
+              2024 Algorand Regional Hackathon ~~~
+            </div>
+          ) : (
+            <>
+              <div className={styles['text']}>
+                2024 Algorand Regional Hackathon ~~~
+              </div>
+              <div className={styles['text']}>
+                2024 Algorand Regional Hackathon ~~~
+              </div>
+              <div className={styles['text']}>
+                2024 Algorand Regional Hackathon ~~~
+              </div>
+              <div className={styles['text']}>
+                2024 Algorand Regional Hackathon ~~~
+              </div>
+            </>
+          )}
         </Link>
+
         <div className={styles['lead-section']}>
           <div className={styles['top-section']}>
             <div className={styles['title']}>DaoWakanda</div>
