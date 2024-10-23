@@ -56,7 +56,6 @@ export function MainSection() {
     debounceSearch(searchTerm);
   }, [searchTerm]);
 
-  console.log(trivias);
   return (
     <div className={styles['main-container']}>
       <div className={styles['left-section']}>
@@ -111,9 +110,15 @@ export function MainSection() {
               <div className={styles['title']}>Points</div>
             </div>
             <div className={styles['content']}>
-              {leaderboardItems?.map((item, index) => (
-                <LeaderBoardComponent item={item} index={index} />
-              ))}
+              {leaderboardItems
+                ?.sort((a, b) => b.totalAlgos - a.totalAlgos)
+                ?.map((item, index) => (
+                  <LeaderBoardComponent
+                    key={item.name}
+                    item={item}
+                    index={index}
+                  />
+                ))}
             </div>
           </div>
         </div>
