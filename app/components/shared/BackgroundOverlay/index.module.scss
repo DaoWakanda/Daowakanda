@@ -1,6 +1,6 @@
 @import '../../../../styles/index.scss';
 
-.wrapper, .wrapper-right {
+.wrapper, .wrapper-right, .wrapper-bottom {
   position: fixed;
   top: 0;
   left: 0;
@@ -36,4 +36,10 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+}
+
+.wrapper-bottom{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
