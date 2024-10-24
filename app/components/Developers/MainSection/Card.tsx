@@ -11,7 +11,7 @@ interface Props {
   data: ITrivia;
 }
 export function Card({ data }: Props) {
-  const [timeLeft, setTimeLeft] = useState<string>("00:00:00");
+  const [timeLeft, setTimeLeft] = useState<string>("00:00:00:00");
 
   useEffect(() => {
 
@@ -20,11 +20,14 @@ export function Card({ data }: Props) {
       const difference = (data?.endTimeStamp / 1000) - currentTime;
   
       if (difference > 0) {
-        const hours = Math.floor(difference / 3600);
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(difference / (1000 * 3600) % 24);
         const minutes = Math.floor((difference % 3600) / 60);
         const seconds = Math.floor(difference % 60);
   
-        const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        const formattedTime = `${String(days).padStart(2, '0')} days ${String(hours).padStart(2, '0')} hrs ${String(
+          minutes,
+        ).padStart(2, '0')}mins ${String(seconds).padStart(2, '0')}secs`;
         setTimeLeft(formattedTime);
       } else {
         setTimeLeft("00:00:00");

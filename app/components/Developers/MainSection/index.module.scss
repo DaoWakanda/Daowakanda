@@ -4,9 +4,14 @@
   display: flex;
   min-height: 100vh;
   width: 100%;
-  margin-top: 100px;
-  padding: 15px 32px;
+  padding: 15px 16px;
   gap: 24px;
+  font-family: 'Roboto';
+
+  @include tablet{
+    margin-top: 100px;
+    padding: 15px 32px;
+  }
 }
 
 .left-section {
@@ -19,6 +24,11 @@
   padding: 16px;
   gap: 30px;
   margin-top: 50px;
+  display: none;
+
+  @include tablet{
+    display: flex;
+  }
 
   .card-detail-filter {
     background: #211f26;
@@ -128,7 +138,6 @@
   .card-detail {
     background: #211f26;
     width: 294px;
-    // min-height: 500px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -231,21 +240,72 @@
 
 .right-section {
   display: flex;
-  width: 75%;
+  width: 100%;
   min-height: 100vh;
   gap: 16px;
   flex-direction: column;
+
+  @include tablet{
+    width: 75%;
+  }
 
   .title {
     color: #ffffff;
     font-size: 28px;
     font-family: 'Roboto';
     font-weight: 700;
+    display: none;
+
+    @include tablet{
+      display: flex;
+    }
+  }
+
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+
+    .titles {
+      color: #ffffff;
+      font-size: 28px;
+      font-family: 'Roboto';
+      font-weight: 700;
+    }
+
+    .earnings{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 32px;
+      width: 161px;
+      border-radius: 16px;
+      gap: 8px;
+      padding: 4px 8px;
+      border: 1px solid #8E8E93;
+      background: #000;
+      font-weight: 400;
+      font-size: 14px;
+      color: #C7C7CC;
+      cursor: pointer;
+
+      .icon{
+        color: #C7C7CC;
+        width: 24px;
+        height: 24px;
+        transition: all .7s ease;
+      }
+    }
   }
   .cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 24px;
+
+    @include tablet{
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     .card-container {
       grid-column: auto;

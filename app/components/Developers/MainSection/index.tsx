@@ -16,8 +16,11 @@ import {
 } from '@/interfaces/developer.interface';
 import { LeaderBoardComponent } from './LeaderBoardItem';
 import { useDebounce } from '@/hooks/useDebounce';
+import { useWindowDimensions } from '@/hooks';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 export function MainSection() {
+  const [active, setActive] = useState(false);
   const { getAllTrivia, fetchLeaderboard } = useDeveloperActions();
   const [leaderboardItems, setLeaderboardItems] = useState<LeaderBoardItem[]>();
   const trivias = useRecoilValue(TriviasAtom);
@@ -26,6 +29,8 @@ export function MainSection() {
   });
   const searchTerm = useRecoilValue(TriviaSearchTerm);
   const { debounce } = useDebounce();
+  const { width } = useWindowDimensions();
+  const isMobile = width ? width < 768 : false;
 
   const options: TriviaDifficulty[] = ['novice', 'amateur', 'pro'];
 
@@ -56,7 +61,6 @@ export function MainSection() {
     debounceSearch(searchTerm);
   }, [searchTerm]);
 
-  console.log(trivias);
   return (
     <div className={styles['main-container']}>
       <div className={styles['left-section']}>
@@ -121,6 +125,18 @@ export function MainSection() {
 
       <div className={styles['right-section']}>
         <div className={styles['title']}>Tasks</div>
+        {
+          isMobile && (
+            <div className={styles['header']}>
+              <div className={styles['titles']}>Tasks</div>
+              <div className={styles['earnings']} onClick={()=>setActive(!active)}>My Earning: <span>514</span>
+              {
+                !active ? <IoIosArrowDown className={styles['icon']} />  : <IoIosArrowUp className={styles['icon']} /> 
+              }
+              </div>
+            </div>
+          )
+        }
         <div className={styles['cards']}>
           {trivias?.data.map((trivia, index) => (
             <Card key={index} data={trivia} />
