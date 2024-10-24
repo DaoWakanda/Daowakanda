@@ -521,7 +521,7 @@ export function LandingPage() {
       {/*Notify ends*/}
       <div className={styles['footer']}>
         <div className={styles['card']}>
-          <div className={styles['title']}>DaoWakanda Communities</div>
+          <div className={styles['title']}>Communities</div>
           <div className={styles['lower-section']}>
             <Link
               href="https://twitter.com/DaoWakanda"
@@ -558,18 +558,28 @@ export function LandingPage() {
             <Link href="/governance" className={styles['item']}>
               Governance
             </Link>
-            <div className={styles['item']}>DAO Voting</div>
-            <div className={styles['item']}>Documentation</div>
-            <div className={styles['item']}>Research Forum</div>
+            <Link href="/developers" className={styles['item']}>
+              AlgoDev
+            </Link>
+            <Link href="/hackathon" className={styles['item']}>
+              Hackathon
+            </Link>
           </div>
         </div>
         <div className={styles['card']}>
           <div className={styles['title']}>About Us</div>
           <div className={styles['lower-section']}>
             <div className={styles['item']}>FAQs</div>
-            <div className={styles['item']}>Help Center</div>
-            <div className={styles['item']}>Download Dev. Kit</div>
-            <div className={styles['item']}>Blog</div>
+            <a href="mailto:eyitayo.anjorin@daowakanda.org">
+              <div className={styles['item']}>Help Center</div>
+            </a>
+
+            <Link
+              href="https://developer.algorand.org/docs/get-started/algokit"
+              className={styles['item']}
+            >
+              Download AlgoKit
+            </Link>
           </div>
         </div>
       </div>

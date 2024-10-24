@@ -4,9 +4,12 @@ import styles from './index.module.scss';
 import { useRecoilState } from 'recoil';
 import { TriviaSearchTerm } from '@/features/developers/state/developer.atom';
 
-export function SearchSection() {
+interface Props{
+  toggleModal : any;
+}
+export function SearchSection({toggleModal}:Props) {
   const [searchTerm, setSearchTerm] = useRecoilState(TriviaSearchTerm);
-
+  
   return (
     <div className={styles['container']}>
       <div className={styles['inner-container']}>
@@ -18,6 +21,13 @@ export function SearchSection() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <FaSearch className={styles['icon']} />
+
+        <img
+          src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728500099/elements_pawxnl.png"
+          alt="filter"
+          className={styles['filter']}
+          onClick={()=> toggleModal()}
+        />
       </div>
     </div>
   );

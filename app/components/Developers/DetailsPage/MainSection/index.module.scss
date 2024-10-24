@@ -4,11 +4,16 @@
   display: flex;
   min-height: 100vh;
   width: 100%;
-  padding: 15px 32px;
-  margin-top: 100px;
+  padding: 16px 10px;
+  margin-top: 130px;
   gap: 16px;
   flex-direction: column;
   font-family: 'Roboto';
+
+  @include tablet{
+    padding: 15px 32px;
+    margin-top: 100px;
+  }
 
   .header {
     display: flex;
@@ -49,11 +54,20 @@
         align-items: center;
         justify-content: center;
         gap: 16px;
-        height: 349px;
+        height: 194px;
+
+        @include tablet{
+          height: 349px;
+        }
 
         img{
-          width: 349px;
-          height: 349px;
+          width: 194px;
+          height: 194px;
+
+          @include tablet{
+            width: 349px;
+            height: 349px;
+          }
         }
       }
       .lead {
@@ -62,9 +76,13 @@
         color: #f2f2f7;
       }
       .text {
-        font-weight: 400;
-        font-size: 22px;
+        font-weight: 500;
+        font-size: 16px;
         color: #d1d1d6;
+
+        @include tablet{
+          font-size: 22px;
+        }
       }
       .link {
         font-weight: 400;
@@ -76,45 +94,67 @@
     .normal {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 32px;
       border-radius: 16px;
       background: #211f26;
-      padding: 10px 20px;
+      padding: 10px 15px;
+
+      @include tablet{
+        gap: 24px;
+        padding: 10px 20px;
+      }
 
       .top-section {
         display: flex;
         flex-direction: column;
         gap: 16px;
-        min-height: 96px;
+        min-height: 128px;
         font-family: 'Roboto';
+
+        @include tablet{
+          min-height: 96px;
+        }
 
         .lead {
           color: #f2f2f7;
           font-size: 32px;
           font-weight: 700;
-          height: 40px;
+          line-height: 40px;
           width: 100%;
         }
 
         .content {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           min-height: 40px;
+          flex-direction: column;
+          gap: 8px;
 
+          @include tablet{
+            flex-direction: row;
+            align-items: center;
+          }
+        
           .info {
             display: flex;
             align-items: center;
-            gap: 16px;
+            justify-content: space-between;
+            gap: 3px;
 
             .date,
             .time {
               color: #8e8e93;
-              font-size: 16px;
+              font-size: 12px;
               font-weight: 500;
               display: flex;
               gap: 2px;
               align-items: center;
+
+              @include tablet{
+                font-size: 16px;
+                gap: 10px;
+              }
             }
             .novice,
             .pro,
@@ -147,8 +187,12 @@
             color: #fff;
 
             .price {
-              font-size: 16px;
+              font-size: 14px;
               font-weight: 600;
+
+              @include tablet{
+                font-size: 16px;
+              }
 
               span {
                 font-weight: 400;
@@ -161,8 +205,12 @@
               background: #d9d9d9;
             }
             .max {
-              font-size: 16px;
+              font-size: 14px;
               font-weight: 500;
+
+              @include tablet{
+                font-size: 16px;
+              }
             }
           }
         }
@@ -180,9 +228,14 @@
           width: 100%;
           min-height: 420px;
           font-weight: 400;
-          font-size: 22px;
+          font-size: 14px;
           color: #d1d1d6;
-          line-height: 28px;
+          line-height: 20px;
+
+          @include tablet{
+            font-size: 22px;
+            line-height: 28px;
+          }
         }
 
         .form {
@@ -194,7 +247,7 @@
           padding-bottom: 30px;
 
           .input {
-            width: 75%;
+            width: 65%;
             height: 60px;
             border: 1px solid #8e8e93;
             background-color: #1b1b1f;
@@ -202,8 +255,14 @@
             border-radius: 32px;
             color: #fff;
             font-weight: 400;
-            font-size: 16px;
+            font-size: 14px;
             outline: none;
+
+
+            @include tablet{
+              width: 75%;
+              font-size: 16px;
+            }
 
             &::placeholder {
               color: #46464a;
@@ -215,13 +274,17 @@
             justify-content: center;
             align-items: center;
             height: 60px;
-            width: 305px;
+            width: 100px;
             cursor: pointer;
             border-radius: 32px;
             color: #fff;
             background: #34c759;
             font-weight: 400;
             font-size: 16px;
+
+            @include tablet{
+              width: 305px;
+            }
 
             &:disabled {
               background: #8e8e93;
@@ -241,8 +304,12 @@
   border-radius: 16px;
   background: #211f26;
   padding: 16px 8px;
-  margin: 26px 33px 26px 31px;
+  margin: 26px 10px 26px 10px;
   min-height: 300px;
+
+  @include tablet{
+    margin: 26px 33px 26px 31px;
+  }
 
   .top-content {
     border-bottom: 1px solid #484646;
