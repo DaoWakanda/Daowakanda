@@ -13,7 +13,7 @@ import moment from 'moment';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { SampleProposal } from '@/interfaces';
 import { proposalsData } from './mock';
-import { CardProposal } from './CardProposal';
+import { CardProposal, CardProposalLoader } from './CardProposal';
 import { MdOutlineNoteAdd } from 'react-icons/md';
 import { ProposalStatus } from '@/enums';
 import { useProposalActions } from '@/features/governance/actions/proposal.action';
@@ -25,25 +25,11 @@ interface MobileProposalProps {
 export const DesktopProposals = ({
   setCreateProposalModal,
 }: MobileProposalProps) => {
-  const [itemDeleted, setItemDeleted] = useState(false);
-  const [optionsActive, setOptionsActive] = useState<boolean>(false);
   const [selected, setSelected] = useState<ProposalStatus>(ProposalStatus.ALL);
   const [searchTerm, setSearchTerm] = useState('');
   const { getAllProposals } = useProposalActions();
   const proposals = useRecoilValue(ProposalContractsAtom);
   const { activeAddress } = useWallet();
-  const [proposalList, setProposalList] =
-    useState<SampleProposal[]>(proposalsData);
-
-  const filterProposals = () => {
-    if (searchTerm) {
-      return [...proposals].filter((proposal) =>
-        proposal.title.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    }
-
-    return [...proposals];
-  };
 
   useEffect(() => {
     getAllProposals();
@@ -141,7 +127,13 @@ export const DesktopProposals = ({
           </button>
         </div>
       </div>
-      <div className={styles['main-section']}>{proposalFilters()}</div>
+      <div className={styles['main-section']}>
+        {proposalFilters()}
+        {!proposalsData &&
+          Array.from({ length: 5 }).map((_, index) => (
+            <CardProposalLoader key={index} />
+          ))}
+      </div>
     </div>
   );
 };

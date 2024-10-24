@@ -6,6 +6,7 @@ import { RiCalendar2Fill } from 'react-icons/ri';
 import { ITrivia } from '@/interfaces/developer.interface';
 import Skeleton from 'react-loading-skeleton';
 import { useEffect, useState } from 'react';
+import { createSanitizedMarkup } from '@/utils/create-sanitized-markup';
 
 interface Props {
   data: ITrivia;
@@ -14,11 +15,10 @@ export function Card({ data }: Props) {
   const [timeLeft, setTimeLeft] = useState<string>("00:00:00:00");
 
   useEffect(() => {
-
     const updateTimer = () => {
       const currentTime = Math.floor(Date.now() / 1000);
-      const difference = (data?.endTimeStamp / 1000) - currentTime;
-  
+      const difference = data?.endTimeStamp / 1000 - currentTime;
+
       if (difference > 0) {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor(difference / (1000 * 3600) % 24);
@@ -30,10 +30,10 @@ export function Card({ data }: Props) {
         ).padStart(2, '0')}mins ${String(seconds).padStart(2, '0')}secs`;
         setTimeLeft(formattedTime);
       } else {
-        setTimeLeft("00:00:00");
+        setTimeLeft('00:00:00');
       }
     };
-    
+
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
 
@@ -59,7 +59,10 @@ export function Card({ data }: Props) {
               <div className={styles[data.difficulty]}>{data.difficulty}</div>
             </div>
           </div>
-          <div className={styles['paragraph']}>{data.description}</div>
+          <div
+            dangerouslySetInnerHTML={createSanitizedMarkup(data.description)}
+            className={styles['paragraph']}
+          />
         </div>
         <div style={{ flex: 1 }}></div>
         <div className={styles['bottom']}>

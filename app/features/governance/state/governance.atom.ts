@@ -12,7 +12,7 @@ export const VotesAtom = atom<IVote[]>({
   key: 'votes-atom',
 });
 
-export const ProposalContractsAtom = atom<IProposalContract[]>({
-  default: [],
+export const ProposalContractsAtom = atom<IProposalContract[] | null>({
+  default: null,
   key: 'proposal-contracts-atom',
 });

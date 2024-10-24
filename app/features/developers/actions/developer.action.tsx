@@ -133,6 +133,21 @@ export const useDeveloperActions = () => {
     }
   };
 
+  const uploadImage = async (base64: string, userId: string) => {
+    try {
+      const url = `user/${userId}/upload-image`;
+      const response = await fetchWrapper.post(url, { base64 });
+
+      if (response.data) {
+        return response.data;
+      }
+
+      notify.error(response.error?.toString() || 'Something went wrong');
+    } catch (error) {
+      notify.error(error?.toString() || 'Something went wrong');
+    }
+  };
+
   return {
     createDeveloperAccount,
     getDeveloperDetails,
@@ -141,5 +156,6 @@ export const useDeveloperActions = () => {
     getTriviaById,
     submitTriviaAnswer,
     fetchLeaderboard,
+    uploadImage,
   };
 };
