@@ -17,10 +17,11 @@ import {
 import { LeaderBoardComponent } from './LeaderBoardItem';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useWindowDimensions } from '@/hooks';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from 'react-icons/io';
 
 export function MainSection() {
   const [active, setActive] = useState(false);
+  const [fullLeaderBoard, setFullLeaderBoard] = useState(false);
   const { getAllTrivia, fetchLeaderboard } = useDeveloperActions();
   const [leaderboardItems, setLeaderboardItems] = useState<LeaderBoardItem[]>();
   const trivias = useRecoilValue(TriviasAtom);
@@ -33,6 +34,7 @@ export function MainSection() {
   const isMobile = width ? width < 768 : false;
 
   const options: TriviaDifficulty[] = ['novice', 'amateur', 'pro'];
+  const triviaSize = trivias?.data?.length || 0;
 
   const debounceSearch = debounce((term: string) => {
     setFilter((old) => ({
@@ -144,14 +146,81 @@ export function MainSection() {
           )
         }
         <div className={styles['cards']}>
-          {trivias?.data.map((trivia, index) => (
-            <Card key={index} data={trivia} />
-          ))}
+
+          {
+            triviaSize  > 0 ? (
+              trivias?.data.map((trivia, index) => (
+                <Card key={index} data={trivia} />
+              ))
+            ): 'No data to display here'
+          }
 
           {!trivias &&
-            Array.from({ length: 5 }).map((_, idx) => <CardLoader key={idx} />)}
+            Array.from({ length: 5 }).map((_, idx) => <CardLoader key={idx} />)
+          }
         </div>
       </div>
+
+      {
+        active && (
+          <div className={styles['modal-container']}>
+            <div className={styles['table']}>
+              <div className={styles['content']}>
+                {leaderboardItems?.slice(0, 5)
+                  ?.sort((a, b) => b.totalAlgos - a.totalAlgos)
+                  ?.map((item, index) => (
+                    <LeaderBoardComponent
+                      key={item.name}
+                      item={item}
+                      index={index}
+                    />
+                  ))}
+              </div>
+              <div className={styles['link']} 
+                onClick={()=>{
+                  setFullLeaderBoard(true);
+                  setActive(false);
+                }}
+                >
+                View full list
+              </div>
+            </div> 
+          </div>
+        )
+      }
+      {
+        fullLeaderBoard && (
+          <div className={styles['leaderboard-modal']}>
+            <div className={styles['card-detail']}>
+              <div className={styles['top-content']}>
+                <div className={styles['left']}>
+                  <img
+                    src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728504455/pyramid-structure-01_qa9tla.png"
+                    alt="leaderboard"
+                  />
+                  <div className={styles['lead-text']}>Leaderboard</div>
+                </div>
+                <div className={styles['right']} onClick={()=>setFullLeaderBoard(false)}>
+                  <IoMdClose className={styles['icon']} />
+                </div>
+              </div>
+              <div className={styles['table']}>
+                <div className={styles['content']}>
+                  {leaderboardItems
+                    ?.sort((a, b) => b.totalAlgos - a.totalAlgos)
+                    ?.map((item, index) => (
+                      <LeaderBoardComponent
+                        key={item.name}
+                        item={item}
+                        index={index}
+                      />
+                    ))}
+                </div>
+              </div> 
+            </div>
+          </div>
+        )
+      }
     </div>
   );
 }
