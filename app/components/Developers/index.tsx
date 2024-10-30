@@ -8,7 +8,6 @@ import { ConnectWalletModal } from './connectModal';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { useNotify } from '@/hooks';
 import { dataOne, dataTwo } from './mock';
-import { useFaucetActions } from '@/features/faucet/actions/faucet.action';
 import { useRouter } from 'next/router';
 import { FaHeart } from 'react-icons/fa';
 import { RiTwitterXLine } from 'react-icons/ri';
@@ -38,7 +37,6 @@ export function DevelopersPage() {
   const isMobile = width ? width < 768 : false;
   const { notify } = useNotify();
   const { getDeveloperDetails } = useDeveloperActions();
-  const { registerFaucet } = useFaucetActions();
   const router = useRouter();
 
   // Get the full current URL
