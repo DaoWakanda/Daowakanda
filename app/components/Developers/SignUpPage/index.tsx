@@ -6,11 +6,14 @@ import { ICreateDeveloperDto } from '@/interfaces/developer.interface';
 import { useDeveloperActions } from '@/features/developers/actions/developer.action';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { useWindowDimensions } from '@/hooks';
 
 export function SignUpPage() {
   const { activeAddress } = useWallet();
   const [loading, setLoading] = useState(false);
   const { createDeveloperAccount } = useDeveloperActions();
+  const { width } = useWindowDimensions();
+  const isMobile = width ? width < 768 : false;
   const { push } = useRouter();
   const [data, setData] = useState<ICreateDeveloperDto>({
     firstName: '',
@@ -54,10 +57,12 @@ export function SignUpPage() {
     }
   };
 
+  const baseImage = isMobile ? `https://res.cloudinary.com/dlinprg6k/image/upload/v1730053686/Frame_2_vma7g6.png` :
+    `https://res.cloudinary.com/dlinprg6k/image/upload/v1728588927/Frame_zqjnan.png`;
   return (
     <div className={styles['container']}>
       <img
-        src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728588927/Frame_zqjnan.png"
+        src={baseImage}
         alt="frame"
         className={styles['img']}
       />
@@ -71,6 +76,15 @@ export function SignUpPage() {
       <div className={styles['main-section']}>
         <div className={styles['left-section']}>
           <div className={styles['title']}>Complete your profile</div>
+          <div className={styles['header-section']}>
+            <Link href={'/'} className={styles['linkImg']}>
+              <img src="https://res.cloudinary.com/dlinprg6k/image/upload/v1730052651/Group_5_1_nmdiwy.png" alt="logo" />
+            </Link>
+            <div className={styles['lead']}>Let’s Know Who You Are.</div>
+            <div className={styles['text']}>
+              Complete KYC and tell community members about you.
+            </div>
+          </div>
           <div className={styles['form']}>
             <div className={styles['input']}>
               <label>First name:</label>
