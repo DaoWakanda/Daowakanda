@@ -18,10 +18,12 @@ import { LeaderBoardComponent } from './LeaderBoardItem';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useWindowDimensions } from '@/hooks';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from 'react-icons/io';
+import { useWallet } from '@txnlab/use-wallet-react';
 
 export function MainSection() {
   const [active, setActive] = useState(false);
   const [fullLeaderBoard, setFullLeaderBoard] = useState(false);
+  const { activeAddress } = useWallet();
   const { getAllTrivia, fetchLeaderboard } = useDeveloperActions();
   const [leaderboardItems, setLeaderboardItems] = useState<LeaderBoardItem[]>();
   const trivias = useRecoilValue(TriviasAtom);
@@ -137,7 +139,7 @@ export function MainSection() {
           isMobile && (
             <div className={styles['header']}>
               <div className={styles['titles']}>Tasks</div>
-              <div className={styles['earnings']} onClick={()=>setActive(!active)}>My Earning: <span>514</span>
+              <div className={styles['earnings']} onClick={()=>setActive(!active)}>My Earning: <span>0</span>
               {
                 !active ? <IoIosArrowDown className={styles['icon']} />  : <IoIosArrowUp className={styles['icon']} /> 
               }

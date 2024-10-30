@@ -7,6 +7,11 @@
   scroll-behavior: smooth;
   position: relative;
   background: #0F0D13;
+  overflow-x: hidden;
+
+  @include tablet{
+    overflow-x: auto;
+  }
 
   .mobile-header {
     position: fixed;

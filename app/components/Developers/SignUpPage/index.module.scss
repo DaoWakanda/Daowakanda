@@ -3,8 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 68px;
-  padding: 61px 72px;
+  padding: 68px 16px;
   background: #282c35;
   height: 100vh;
   width: 100%;
@@ -12,19 +11,35 @@
   scroll-behavior: smooth;
   position: relative;
 
+  @include tablet{
+    gap: 68px;
+    padding: 61px 72px;
+  }
+
   .img {
     position: absolute;
-    height: 450px;
-    width: 450px;
-    bottom: 0;
-    right: 0;
+    height: 235px;
+    width: 235px;
+    top: 99%;
+    right: 80px;
+
+    @include tablet{
+      height: 450px;
+      width: 450px;
+      bottom: 0;
+      right: 0;
+    }
   }
 
   .link {
-    display: flex;
+    display: none;
     height: 32px;
     width: 194px;
     cursor: pointer;
+
+    @include tablet{
+      display: flex;
+    }
 
     .link-img {
       width: inherit;
@@ -33,14 +48,21 @@
   }
   .main-section {
     display: flex;
-    gap: 130px;
+
+    @include tablet{
+      gap: 130px;
+    }
 
     .right-section {
-      display: flex;
+      display: none;
       flex-direction: column;
       min-height: 106px;
       gap: 22px;
       width: 528px;
+
+      @include tablet{
+        display: flex;
+      }
 
       .title {
         color: #c5ee4f;
@@ -60,10 +82,18 @@
     .left-section {
       display: flex;
       flex-direction: column;
-      gap: 40px;
-      padding: 30px 51px;
+      gap: 32px;
+      padding: 32px 16px;
       background: #1f2431;
       border-radius: 16px;
+      z-index: 10;
+      width: 100%;
+
+      @include tablet{
+        gap: 40px;
+        padding: 30px 51px;
+        width: auto;
+      }
 
       .title {
         color: #c5ee4f;
@@ -73,13 +103,62 @@
         width: 100%;
         display: flex;
         min-height: 66px;
+        display: none;
+
+        @include tablet{
+          display: flex;
+        }
+      }
+      .header-section{
+        display: flex;
+        flex-direction: column;
+        min-height: 112px;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+
+        @include tablet{
+          display: none;
+        }
+
+        .linkImg{
+          img{
+            width: 32px;
+            height: 32px;
+          }
+        }
+       
+        .lead {
+          color: #c5ee4f;
+          font-family: 'Avenir';
+          font-weight: 700;
+          font-size: 24px;
+
+          @include tablet{
+            font-weight: 800;
+            font-size: 32px;  
+          }
+        }
+  
+        .text {
+          color: #d1d1d6;
+          font-family: 'Avenir';
+          font-weight: 500;
+          font-size: 14px;
+          text-align: center;
+
+          @include tablet{
+            font-weight: 300;
+            font-size: 20px;
+          }
+        }
       }
       .form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
         min-height: 474px;
         width: 100%;
         gap: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
 
         .input,
         .input-long {
@@ -89,6 +168,11 @@
           flex-direction: column;
           gap: 8px;
 
+          @include tablet{
+            grid-column: span 1;
+            width: auto;
+          }
+
           label {
             color: #e5e5ea;
             font-family: 'Roboto';
@@ -97,7 +181,7 @@
           }
 
           input {
-            width: inherit;
+            width: 100%;
             height: 54px;
             border: 1px solid #49454f;
             background-color: #2b2930;
@@ -108,6 +192,10 @@
             font-size: 14px;
             font-family: 'Roboto';
             outline: none;
+
+            @include tablet{
+              width: inherit;
+            }
           }
         }
         .input-long {
