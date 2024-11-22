@@ -3,6 +3,10 @@ import styles from './index.module.scss';
 import { DashboardWrapper, ScrollableContainer } from '../shared';
 import { FaPlus } from 'react-icons/fa';
 import { LowerSection } from './Sub-components/LowerSection';
+import { CreateTaskModal } from './CreateTaskModal';
+import { HiDotsVertical } from 'react-icons/hi';
+import { EditTaskModal } from './EditTaskModal copy';
+import { TaskCard } from './TaskCard';
 
 interface Props {
   children?: ReactNode;
@@ -10,6 +14,19 @@ interface Props {
 }
 
 export function DashboardOverviewPage() {
+  const[createModal, setCreateModal] = useState(false);
+  const[editModal, setEditModal] = useState(false);
+
+  if(createModal){
+    return (
+      <CreateTaskModal isActive={createModal} onclick={()=>setCreateModal(false)}/>
+    )
+  }
+  if(editModal){
+    return (
+      <EditTaskModal isActive={editModal} onclick={()=>setEditModal(false)}/>
+    )
+  }
 
   return (
     <DashboardWrapper pageTitle='Overview'>
@@ -25,16 +42,14 @@ export function DashboardOverviewPage() {
             </div>
           </div>
           <div className={styles['right']}>
-            <div className={styles['create']}>
+            <div className={styles['create']} onClick={()=>setCreateModal(true)}>
               <FaPlus className={styles['icon']}/>
             </div>
             <div className={styles['cards']}>
               <ScrollableContainer>
                 {
                   [1,2,3,4,5,6,7,8,9,10].map((_, index)=>(
-                    <div className={styles['card']} key={index}>
-                      UI/UX Design
-                    </div>
+                    <TaskCard key={index} showEditModal={()=>setEditModal(true)} />
                   ))
                 }
               </ScrollableContainer>
