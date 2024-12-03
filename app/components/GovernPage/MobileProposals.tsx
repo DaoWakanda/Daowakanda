@@ -32,25 +32,25 @@ export const MobileProposals = ({ openProposalModal }: MobileProposalProps) => {
 
     switch (selected) {
       case 'In Progress':
-        return proposals
+        return proposals?.data
           ?.filter((item) => item.endDate > now)
           ?.map((item, index) => <CardProposal data={item} key={index} />);
       case 'Approved':
-        return proposals
+        return proposals?.data
           ?.filter(
             (item) =>
               item.endDate < now && item.yesVotes.length > item.noVotes.length,
           )
           ?.map((item, index) => <CardProposal data={item} key={index} />);
       case 'Denied':
-        return proposals
+        return proposals?.data
           ?.filter(
             (item) =>
               item.endDate < now && item.yesVotes.length < item.noVotes.length,
           )
           ?.map((item, index) => <CardProposal data={item} key={index} />);
       default:
-        return proposals?.map((item, index) => (
+        return proposals?.data?.map((item, index) => (
           <CardProposal data={item} key={index} />
         ));
     }
