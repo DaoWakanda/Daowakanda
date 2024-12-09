@@ -1,4 +1,5 @@
 import { IProposal, IVote } from '@/interfaces/governance.interface';
+import { Pagination } from '@/interfaces/pagination.interface';
 import { IProposalContract } from '@/interfaces/proposal.interface';
 import { atom } from 'recoil';
 
@@ -12,7 +13,9 @@ export const VotesAtom = atom<IVote[]>({
   key: 'votes-atom',
 });
 
-export const ProposalContractsAtom = atom<IProposalContract[] | null>({
-  default: null,
-  key: 'proposal-contracts-atom',
-});
+export const ProposalContractsAtom = atom<Pagination<IProposalContract> | null>(
+  {
+    default: null,
+    key: 'proposal-contracts-atom',
+  },
+);

@@ -39,25 +39,25 @@ export const DesktopProposals = ({
     const now = Date.now();
     switch (selected) {
       case ProposalStatus.INPROGRESS:
-        return proposals
+        return proposals?.data
           ?.filter((item) => item.endDate > now)
           ?.map((item, index) => <CardProposal data={item} key={index} />);
       case ProposalStatus.APPROVED:
-        return proposals
+        return proposals?.data
           ?.filter(
             (item) =>
               item.endDate < now && item.yesVotes.length > item.noVotes.length,
           )
           ?.map((item, index) => <CardProposal data={item} key={index} />);
       case ProposalStatus.DENIED:
-        return proposals
+        return proposals?.data
           ?.filter(
             (item) =>
               item.endDate < now && item.yesVotes.length < item.noVotes.length,
           )
           ?.map((item, index) => <CardProposal data={item} key={index} />);
       default:
-        return proposals?.map((item, index) => (
+        return proposals?.data?.map((item, index) => (
           <CardProposal data={item} key={index} />
         ));
     }

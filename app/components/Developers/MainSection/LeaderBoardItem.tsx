@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { LeaderBoardItem as ILeaderBoardItem } from '@/interfaces/developer.interface';
 import styles from './index.module.scss';
 
