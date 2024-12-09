@@ -8,7 +8,6 @@ import { ConnectWalletModal } from './connectModal';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { useNotify } from '@/hooks';
 import { dataOne, dataTwo } from './mock';
-import { useFaucetActions } from '@/features/faucet/actions/faucet.action';
 import { useRouter } from 'next/router';
 import { FaHeart } from 'react-icons/fa';
 import { RiTwitterXLine } from 'react-icons/ri';
@@ -20,6 +19,7 @@ import { SearchSection } from './SearchSection';
 import { EditProfileModal } from './EditProfileModal';
 import { useDeveloperActions } from '@/features/developers/actions/developer.action';
 import { EditProfileForm } from './EditProfileForm';
+import { FiltersModal } from './FiltersModal';
 
 export function DevelopersPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -31,12 +31,12 @@ export function DevelopersPage() {
   const [connectWalletModal, setConnectWalletModal] = useState(false);
   const [editProfileModal, setEditProfileModal] = useState(false);
   const [editProfileForm, setEditProfileForm] = useState(false);
+  const [filterModal, setFilterModal] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
   const isMobile = width ? width < 768 : false;
   const { notify } = useNotify();
   const { getDeveloperDetails } = useDeveloperActions();
-  const { registerFaucet } = useFaucetActions();
   const router = useRouter();
 
   // Get the full current URL
@@ -64,6 +64,10 @@ export function DevelopersPage() {
     providers?.forEach((provider) => provider.disconnect());
   };
 
+  const toggleFilterModal = () =>{
+    setFilterModal(!filterModal);
+  }
+
   const connectWalletMessage = () => {
     setTimeout(() => {
       notify.info(`Please Connect Your Wallet`);
@@ -88,6 +92,14 @@ export function DevelopersPage() {
           onclick={() => {
             setEditProfileForm(false);
             setEditProfileModal(false);
+          }}
+        />
+      )}
+       {filterModal && (
+        <FiltersModal
+          isActive={true}
+          onclick={() => {
+            setFilterModal(false);
           }}
         />
       )}
@@ -327,7 +339,7 @@ export function DevelopersPage() {
       )}
 
       <TopSection />
-      <SearchSection />
+      <SearchSection toggleModal={toggleFilterModal}/>
       <MainSection />
 
       {/*Footer Ends*/}

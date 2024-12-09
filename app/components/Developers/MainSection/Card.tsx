@@ -6,26 +6,28 @@ import { RiCalendar2Fill } from 'react-icons/ri';
 import { ITrivia } from '@/interfaces/developer.interface';
 import Skeleton from 'react-loading-skeleton';
 import { useEffect, useState } from 'react';
+import { createSanitizedMarkup } from '@/utils/create-sanitized-markup';
 
 interface Props {
   data: ITrivia;
 }
 export function Card({ data }: Props) {
-  const [timeLeft, setTimeLeft] = useState<string>('00:00:00');
+  const [timeLeft, setTimeLeft] = useState<string>("00:00:00:00");
 
   useEffect(() => {
     const updateTimer = () => {
       const currentTime = Math.floor(Date.now() / 1000);
-      const difference = data?.endTimeStamp / 1000 - currentTime;
+      const difference = (data?.endTimeStamp / 1000) - currentTime;
 
       if (difference > 0) {
-        const hours = Math.floor(difference / 3600);
+        const days = Math.floor(difference / (60 * 60 * 24));
+        const hours = Math.floor((difference % (60 * 60 * 24)) / (60 * 60));
         const minutes = Math.floor((difference % 3600) / 60);
         const seconds = Math.floor(difference % 60);
-
-        const formattedTime = `${String(hours).padStart(2, '0')}:${String(
+  
+        const formattedTime = `${String(days).padStart(2, '0')} days ${String(hours).padStart(2, '0')} hrs ${String(
           minutes,
-        ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        ).padStart(2, '0')}mins ${String(seconds).padStart(2, '0')}secs`;
         setTimeLeft(formattedTime);
       } else {
         setTimeLeft('00:00:00');
@@ -57,7 +59,10 @@ export function Card({ data }: Props) {
               <div className={styles[data.difficulty]}>{data.difficulty}</div>
             </div>
           </div>
-          <div className={styles['paragraph']}>{data.description}</div>
+          <div
+            dangerouslySetInnerHTML={createSanitizedMarkup(data.description)}
+            className={styles['paragraph']}
+          />
         </div>
         <div style={{ flex: 1 }}></div>
         <div className={styles['bottom']}>

@@ -15,11 +15,12 @@ import { useWallet } from '@txnlab/use-wallet-react';
 import { useNotify } from '@/hooks';
 import toast from 'react-hot-toast';
 import { LeaderBoardComponent } from '../../MainSection/LeaderBoardItem';
+import { createSanitizedMarkup } from '@/utils/create-sanitized-markup';
 
 export function MainSection() {
   const developerProfile = useRecoilValue(DeveloperProfileAtom);
   const [trivia, setTrivia] = useState<ITrivia>();
-  const [timeLeft, setTimeLeft] = useState<string>('00:00:00');
+  const [timeLeft, setTimeLeft] = useState<string>('00:00:00:00');
 
   const { fetchLeaderboard } = useDeveloperActions();
   const [leaderboardItems, setLeaderboardItems] = useState<LeaderBoardItem[]>();
@@ -90,13 +91,14 @@ export function MainSection() {
       const difference = Number(trivia?.endTimeStamp) / 1000 - currentTime;
 
       if (difference > 0) {
-        const hours = Math.floor(difference / 3600);
+        const days = Math.floor(difference / (60 * 60 * 24));
+        const hours = Math.floor((difference % (60 * 60 * 24)) / (60 * 60));
         const minutes = Math.floor((difference % 3600) / 60);
         const seconds = Math.floor(difference % 60);
 
-        const formattedTime = `${String(hours).padStart(2, '0')}:${String(
+        const formattedTime = `${String(days).padStart(2, '0')} days ${String(hours).padStart(2, '0')} hrs ${String(
           minutes,
-        ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        ).padStart(2, '0')}mins ${String(seconds).padStart(2, '0')}secs`;
         setTimeLeft(formattedTime);
       } else {
         setTimeLeft('00:00:00');
@@ -191,7 +193,7 @@ export function MainSection() {
                   </div>
                   <div className={styles['bottom']}>
                     <div className={styles['price']}>
-                      Price:{' '}
+                      Prize:{' '}
                       <span>
                         {trivia ? (
                           `${trivia.prize} algos`
@@ -220,16 +222,23 @@ export function MainSection() {
               </div>
 
               <div className={styles['bottom-section']}>
-                <div className={styles['text']}>
-                  {trivia?.description || (
+                {trivia?.description ? (
+                  <div
+                    dangerouslySetInnerHTML={createSanitizedMarkup(
+                      trivia.description,
+                    )}
+                    className={styles['text']}
+                  ></div>
+                ) : (
+                  <div className={styles['text']}>
                     <Skeleton
                       count={5}
                       baseColor="#202020"
                       highlightColor="#444"
                       width={'100%'}
                     />
-                  )}
-                </div>
+                  </div>
+                )}
                 {trivia?.status !== 'expired' && (
                   <div className={styles['form']}>
                     <input
