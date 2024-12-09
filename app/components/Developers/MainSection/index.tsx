@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Card, CardLoader } from './Card';
 import styles from './index.module.scss';
-import { names, tasks } from '../mock';
 import { useDeveloperActions } from '@/features/developers/actions/developer.action';
 import { useRecoilValue } from 'recoil';
 import {
@@ -135,40 +134,82 @@ export function MainSection() {
 
       <div className={styles['right-section']}>
         <div className={styles['title']}>Tasks</div>
-        {
-          isMobile && (
-            <div className={styles['header']}>
-              <div className={styles['titles']}>Tasks</div>
-              <div className={styles['earnings']} onClick={()=>setActive(!active)}>My Earning: <span>0</span>
-              {
-                !active ? <IoIosArrowDown className={styles['icon']} />  : <IoIosArrowUp className={styles['icon']} /> 
-              }
-              </div>
+        {isMobile && (
+          <div className={styles['header']}>
+            <div className={styles['titles']}>Tasks</div>
+            <div
+              className={styles['earnings']}
+              onClick={() => setActive(!active)}
+            >
+              My Earning: <span>0</span>
+              {!active ? (
+                <IoIosArrowDown className={styles['icon']} />
+              ) : (
+                <IoIosArrowUp className={styles['icon']} />
+              )}
             </div>
-          )
-        }
+          </div>
+        )}
         <div className={styles['cards']}>
-
-          {
-            triviaSize  > 0 ? (
-              trivias?.data.map((trivia, index) => (
+          {triviaSize > 0
+            ? trivias?.data.map((trivia, index) => (
                 <Card key={index} data={trivia} />
               ))
-            ): 'No data to display here'
-          }
+            : 'No data to display here'}
 
           {!trivias &&
-            Array.from({ length: 5 }).map((_, idx) => <CardLoader key={idx} />)
-          }
+            Array.from({ length: 5 }).map((_, idx) => <CardLoader key={idx} />)}
         </div>
       </div>
 
-      {
-        active && (
-          <div className={styles['modal-container']}>
+      {active && (
+        <div className={styles['modal-container']}>
+          <div className={styles['table']}>
+            <div className={styles['content']}>
+              {leaderboardItems
+                ?.slice(0, 5)
+                ?.sort((a, b) => b.totalAlgos - a.totalAlgos)
+                ?.map((item, index) => (
+                  <LeaderBoardComponent
+                    key={item.name}
+                    item={item}
+                    index={index}
+                  />
+                ))}
+            </div>
+            <div
+              className={styles['link']}
+              onClick={() => {
+                setFullLeaderBoard(true);
+                setActive(false);
+              }}
+            >
+              View full list
+            </div>
+          </div>
+        </div>
+      )}
+      {fullLeaderBoard && (
+        <div className={styles['leaderboard-modal']}>
+          <div className={styles['card-detail']}>
+            <div className={styles['top-content']}>
+              <div className={styles['left']}>
+                <img
+                  src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728504455/pyramid-structure-01_qa9tla.png"
+                  alt="leaderboard"
+                />
+                <div className={styles['lead-text']}>Leaderboard</div>
+              </div>
+              <div
+                className={styles['right']}
+                onClick={() => setFullLeaderBoard(false)}
+              >
+                <IoMdClose className={styles['icon']} />
+              </div>
+            </div>
             <div className={styles['table']}>
               <div className={styles['content']}>
-                {leaderboardItems?.slice(0, 5)
+                {leaderboardItems
                   ?.sort((a, b) => b.totalAlgos - a.totalAlgos)
                   ?.map((item, index) => (
                     <LeaderBoardComponent
@@ -178,51 +219,10 @@ export function MainSection() {
                     />
                   ))}
               </div>
-              <div className={styles['link']} 
-                onClick={()=>{
-                  setFullLeaderBoard(true);
-                  setActive(false);
-                }}
-                >
-                View full list
-              </div>
-            </div> 
-          </div>
-        )
-      }
-      {
-        fullLeaderBoard && (
-          <div className={styles['leaderboard-modal']}>
-            <div className={styles['card-detail']}>
-              <div className={styles['top-content']}>
-                <div className={styles['left']}>
-                  <img
-                    src="https://res.cloudinary.com/dlinprg6k/image/upload/v1728504455/pyramid-structure-01_qa9tla.png"
-                    alt="leaderboard"
-                  />
-                  <div className={styles['lead-text']}>Leaderboard</div>
-                </div>
-                <div className={styles['right']} onClick={()=>setFullLeaderBoard(false)}>
-                  <IoMdClose className={styles['icon']} />
-                </div>
-              </div>
-              <div className={styles['table']}>
-                <div className={styles['content']}>
-                  {leaderboardItems
-                    ?.sort((a, b) => b.totalAlgos - a.totalAlgos)
-                    ?.map((item, index) => (
-                      <LeaderBoardComponent
-                        key={item.name}
-                        item={item}
-                        index={index}
-                      />
-                    ))}
-                </div>
-              </div> 
             </div>
           </div>
-        )
-      }
+        </div>
+      )}
     </div>
   );
 }
