@@ -22,7 +22,7 @@
     "@walletconnect/sign-client": "^2.17.0",
     "algosdk": "^2.7.0",
     "axios": "^1.6.8",
-    "dompurify": "^3.1.7",
+    "dompurify": "^3.2.2",
     "lute-connect": "^1.4.1",
     "magic-sdk": "^28.11.0",
     "marquee": "^0.2.1",

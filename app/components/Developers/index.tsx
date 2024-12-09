@@ -64,9 +64,9 @@ export function DevelopersPage() {
     providers?.forEach((provider) => provider.disconnect());
   };
 
-  const toggleFilterModal = () =>{
+  const toggleFilterModal = () => {
     setFilterModal(!filterModal);
-  }
+  };
 
   const connectWalletMessage = () => {
     setTimeout(() => {
@@ -95,7 +95,7 @@ export function DevelopersPage() {
           }}
         />
       )}
-       {filterModal && (
+      {filterModal && (
         <FiltersModal
           isActive={true}
           onclick={() => {
@@ -258,7 +258,7 @@ export function DevelopersPage() {
               onMouseEnter={() => setActiveDropDownTwo(true)}
               onMouseLeave={() => setActiveDropDown(false)}
             >
-              <Link href="/landingpage">communities</Link>
+              <Link href="">communities</Link>
               {activeDropDownTwo && (
                 <div
                   className={styles['nav-dropdown']}
@@ -339,7 +339,7 @@ export function DevelopersPage() {
       )}
 
       <TopSection />
-      <SearchSection toggleModal={toggleFilterModal}/>
+      <SearchSection toggleModal={toggleFilterModal} />
       <MainSection />
 
       {/*Footer Ends*/}

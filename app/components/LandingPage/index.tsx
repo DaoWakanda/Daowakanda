@@ -211,7 +211,7 @@ export function LandingPage() {
                 onMouseEnter={() => setActiveDropDownTwo(true)}
                 onMouseLeave={() => setActiveDropDown(false)}
               >
-                <Link href="/landingpage">communities</Link>
+                <Link href="">communities</Link>
                 {activeDropDownTwo && (
                   <div
                     className={styles['nav-dropdown']}
@@ -276,7 +276,7 @@ export function LandingPage() {
             </div>
           </div>
         )}
-        <Link className={styles['notice']} href={'/hackathon'} target="_blank">
+        {/* <Link className={styles['notice']} href={'/hackathon'} target="_blank">
           {isMobile ? (
             <div className={styles['text']}>
               2024 Algorand Regional Hackathon ~~~
@@ -297,7 +297,7 @@ export function LandingPage() {
               </div>
             </>
           )}
-        </Link>
+        </Link> */}
 
         <div className={styles['lead-section']}>
           <div className={styles['top-section']}>

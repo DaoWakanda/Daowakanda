@@ -247,7 +247,7 @@ export function GovernPage() {
               onMouseLeave={() => setActiveDropDown(false)}
             >
               <Link
-                href="/landingpage"
+                href=""
                 style={{
                   color: currentUrl == `/landingpage` ? `#fff` : `#757575`,
                 }}
