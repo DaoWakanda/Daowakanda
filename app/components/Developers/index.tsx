@@ -246,7 +246,7 @@ export function DevelopersPage() {
               onMouseEnter={() => setActiveDropDownTwo(true)}
               onMouseLeave={() => setActiveDropDown(false)}
             >
-              <Link href="/landingpage">communities</Link>
+              <Link href="">communities</Link>
               {activeDropDownTwo && (
                 <div
                   className={styles['nav-dropdown']}
