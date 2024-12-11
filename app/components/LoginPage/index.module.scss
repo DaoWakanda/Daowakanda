@@ -1,0 +1,149 @@
+@import '../../../styles/index.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 68px 16px;
+  background: #282c35;
+  height: 100vh;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  position: relative;
+
+  @include tablet{
+    gap: 90px;
+    padding: 61px 72px;
+    overflow-y: hidden;
+  }
+
+  .img {
+    position: absolute;
+    height: 235px;
+    width: 235px;
+    top: 99%;
+    right: 80px;
+
+    @include tablet{
+      height: 545px;
+      width: 545px;
+      top: 21.5%;
+      right: 0;
+    }
+  }
+
+  .link {
+    display: none;
+    height: 32px;
+    width: 194px;
+    cursor: pointer;
+
+    @include tablet{
+      display: flex;
+    }
+
+    .link-img {
+      width: inherit;
+      height: inherit;
+    }
+  }
+  .main-section {
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    background-color: #1F2431;
+
+
+    @include tablet{
+      gap: 40px;
+      width: 44.3%;
+      height: 590px;
+      padding: 50px 52px;
+    }
+
+    .title {
+      color: #c5ee4f;
+      font-family: 'Avenir';
+      font-weight: 800;
+      font-size: 48px;
+      width: 100%;
+      display: flex;
+      height: 66px;
+      display: none;
+
+      @include tablet{
+        display: flex;
+      }
+    }
+    .form {
+      min-height: 180px;
+      width: 100%;
+      gap: 16px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+
+      .input{
+        height: 82px;
+        grid-column: span 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        @include tablet{
+          grid-column: span 1;
+          width: auto;
+        }
+
+        label {
+          color: #e5e5ea;
+          font-family: 'Roboto';
+          font-weight: 400;
+          font-size: 14px;
+        }
+
+        input {
+          width: 100%;
+          height: 54px;
+          border: 1px solid #49454f;
+          background-color: #2b2930;
+          padding: 17px 16px;
+          border-radius: 11px;
+          color: #8e8e93;
+          font-weight: 400;
+          font-size: 14px;
+          font-family: 'Roboto';
+          outline: none;
+
+          @include tablet{
+            width: inherit;
+          }
+        }
+      }
+    }
+    .btn-proceed {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 56px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 8px;
+      color: #002201;
+      background: #8e8e93;
+      font-weight: 500;
+      font-size: 16px;
+      font-family: 'Roboto';
+      border-radius: 8px;
+    }
+    .btn-proceed {
+      color: #002201;
+      background: #c5ee4f;
+
+      &:disabled {
+        background: #8e8e93;
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }
+}
