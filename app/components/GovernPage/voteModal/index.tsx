@@ -36,7 +36,7 @@ export function VoteModal({
   const [loading, setLoading] = useState(false);
   const { activeAddress } = useWallet();
   const { notify } = useNotify();
-  const { validateWalletAddress, voteForProposal: uploadVote } =
+  const { validateWalletAddressAndProposal, voteForProposal: uploadVote } =
     useProposalActions();
   const { optInToProposalAsa, registerForProposal, voteForProposal } =
     useProposalContract();
@@ -59,7 +59,10 @@ export function VoteModal({
     }
 
     toast.loading('Validating your wallet address...', { id: 'loader' });
-    const validationRes = await validateWalletAddress(activeAddress!);
+    const validationRes = await validateWalletAddressAndProposal(
+      activeAddress!,
+      proposal.appId,
+    );
     toast.dismiss('loader');
 
     if (!validationRes) {

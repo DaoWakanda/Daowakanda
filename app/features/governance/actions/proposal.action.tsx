@@ -34,6 +34,35 @@ export const useProposalActions = () => {
     }
   }, []);
 
+  const validateWalletAddressAndProposal = useCallback(
+    async (address: string, appId: string) => {
+      try {
+        const response = await fetchWrapper.post(
+          'proposal/validate-address-vote',
+          {
+            address,
+            appId,
+          },
+        );
+
+        if (response.data) {
+          return response.data as ValidateWalletAddressResponse;
+        }
+
+        notify.error(
+          response.error?.toString() ||
+            'You cannot vote for this proposal at this time.',
+        );
+      } catch (error) {
+        notify.error(
+          error?.toString() ||
+            'You cannot vote for this proposal at this time.',
+        );
+      }
+    },
+    [],
+  );
+
   const getAllProposals = useCallback(async () => {
     try {
       const response = await fetchWrapper.get('proposal/all');
@@ -128,5 +157,6 @@ export const useProposalActions = () => {
     bootstrapProposal,
     getProposalByAppId,
     voteForProposal,
+    validateWalletAddressAndProposal,
   };
 };
