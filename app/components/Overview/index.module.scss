@@ -1,0 +1,135 @@
+@import '../../../styles/index.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-top-left-radius: 40px;
+  padding: 53px 37px 20px 37px;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.top-section{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 222px;
+  align-items: center;
+  gap: 20px;
+
+  .left{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 378px;
+    height: 100%;
+
+    .title{
+      color: #C5EE4F;
+      font-family: "Avenir";
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 54.64px;
+    }
+    .body-text{
+      color: #C7C7CC;
+      font-family: "Poppins";
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 30px;
+    }
+ 
+  }
+  .right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 60%;
+    // flex: 1;
+
+    .create{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-width: 100px;
+      max-width: 100px;
+      border: 1px dashed #8E8E93;
+      border-radius: 32px;
+      cursor: pointer;
+      color: #8E8E93; 
+    }
+    .cards{
+      display: flex;
+      height: 100%;
+      gap: 16px;
+      width: 100%;
+
+      .card{
+        display: flex;
+        height: 100%;
+        min-width: 200px;
+        border-radius: 32px;
+        background: #000000;
+        color: #fff;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .toolbar-icon{
+          position: absolute;
+          top: 15px;
+          right: 10px;
+          cursor: pointer;
+          color: #fff;
+          font-size: 22px;
+        }
+        .edit-card-modal{
+          position: absolute;
+          border-radius: 32px;
+          inset: 0;    
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+
+          .overlay{
+            position: absolute;
+            background: #000000d5;
+            filter: blur(20px);
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+          }
+          
+          .wrapper{
+            display: flex;
+            flex-direction: column;
+            background: #1F2431;
+            width: 160px;
+            height: 122px;
+            gap: 16px;
+            border-radius: 16px;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+          }
+        }
+      }
+    }
+  }
+}
+.bottom-section{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 900px;
+}

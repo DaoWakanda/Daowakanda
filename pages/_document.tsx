@@ -8,10 +8,28 @@ export default function Document() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-
+        <meta
+          name="description"
+          content="This is a decentralized autonomous organization to revolutionize community engagement and participation starting with Algorand Nigeria"
+        />
+        <meta
+          name="keywords"
+          content="DaoWakanda, Wakanda, Community DAO, DAO, DAO Voting System, Coding Challenges, Decentralized, Autonomous, Organization, Algorand"
+        />
         <meta
           name="image"
-          content="https://res.cloudinary.com/dkuwhyun7/image/upload/v1709861971/Group_5_wz7m5r.pngg"
+          content="https://res.cloudinary.com/dkuwhyun7/image/upload/v1709861971/Group_5_wz7m5r.png"
+        />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/dlinprg6k/image/upload/v1710183598/Group_5_nlkqfr.png"
+        />
+        <meta property="og:title" content="DaoWakanda" />
+        <meta property="og:url" content="https://www.daowakanda.org" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="This is a decentralized autonomous organization to revolutionize community engagement and participation starting with Algorand Nigeria"
         />
         <link
           rel="shortcut icon"
