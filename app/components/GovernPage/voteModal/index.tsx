@@ -62,6 +62,7 @@ export function VoteModal({
     const validationRes = await validateWalletAddressAndProposal(
       activeAddress!,
       proposal.appId,
+      checked === 'Approve',
     );
     toast.dismiss('loader');
 

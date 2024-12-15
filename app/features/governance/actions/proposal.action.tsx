@@ -10,6 +10,7 @@ import {
   IVoteProposalDto,
   ValidateWalletAddressResponse,
 } from '@/interfaces/proposal.interface';
+import { Pagination } from '@/interfaces/pagination.interface';
 
 export const useProposalActions = () => {
   const fetchWrapper = useFetchWrapper();
@@ -35,13 +36,14 @@ export const useProposalActions = () => {
   }, []);
 
   const validateWalletAddressAndProposal = useCallback(
-    async (address: string, appId: string) => {
+    async (address: string, appId: string, vote: boolean) => {
       try {
         const response = await fetchWrapper.post(
           'proposal/validate-address-vote',
           {
             address,
             appId,
+            vote,
           },
         );
 
@@ -65,10 +67,15 @@ export const useProposalActions = () => {
 
   const getAllProposals = useCallback(async () => {
     try {
-      const response = await fetchWrapper.get('proposal/all');
+      const response = await fetchWrapper.get(
+        'proposal/all?numOfItemsPerPage=50',
+      );
 
       if (response.data) {
-        setProposals(response.data);
+        setProposals({
+          pagination: response.data?.pagination,
+          data: response.data?.data?.reverse?.(),
+        });
         return response.data as IProposalContract[];
       }
 
