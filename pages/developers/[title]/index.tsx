@@ -1,13 +1,50 @@
 import { DeveloperDetail } from '@/features/developers/pages/detail';
-import { useRouter } from 'next/router';
-import { Suspense } from 'react';
+import { ITrivia } from '@/interfaces/developer.interface';
+import { GetServerSidePropsContext } from 'next';
+import Head from 'next/head';
 
-export default function Page() {
-  const router = useRouter();
+interface PageProps {
+  trivia?: ITrivia;
+}
 
-  const { id } = router.query;
+export async function getServerSideProps(content: GetServerSidePropsContext) {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const triviaId = content.params?.title;
 
-  // const titleDash = id.spilt(' ').join('-')
-  console.log(id);
-  return <DeveloperDetail />;
+  try {
+    const response = await fetch(`${baseUrl}/user-trivia/${triviaId}/detail`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch challenge SEO: ${response.status}`);
+    }
+
+    const trivia = await response.json();
+
+    return {
+      props: {
+        trivia,
+      },
+    };
+  } catch (error) {
+    return { props: {} };
+  }
+}
+
+export default function Page(props: PageProps) {
+  const title = `${
+    props.trivia?.title || ''
+  } | Developer Challenges | DaoWakanda`;
+  const description = props.trivia?.description || '';
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+      </Head>
+      <DeveloperDetail />
+    </>
+  );
 }
