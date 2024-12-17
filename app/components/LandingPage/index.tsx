@@ -382,11 +382,15 @@ export function LandingPage() {
             />
 
             <Card
-              // onclick={() => router.push('/faucet')}
               title="Claim Wakanda NFT"
               step="Step 2"
               image="https://res.cloudinary.com/dkuwhyun7/image/upload/v1709861971/payment-success-02_yvbygt.png"
               description="To have the right to vote for or against proposals you must possess our WAKANDA NFTs."
+              onclick={() =>
+                router.push(
+                  'https://goplausible.xyz/claim/tetg9f2x2hwwk42epy4p64430dd56qb9gndyt6szr0an8ka0x1qy2nepp21z979c8zgn27ftd4xdggw7c0n71j1k0p1vmfwc32bkg18',
+                )
+              }
             />
 
             <Card
