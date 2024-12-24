@@ -381,17 +381,18 @@ export function LandingPage() {
               description="Connecting your wallet automatically makes you a member of the community."
             />
 
-            <Card
-              title="Claim Wakanda NFT"
-              step="Step 2"
-              image="https://res.cloudinary.com/dkuwhyun7/image/upload/v1709861971/payment-success-02_yvbygt.png"
-              description="To have the right to vote for or against proposals you must possess our WAKANDA NFTs."
-              onclick={() =>
-                router.push(
-                  'https://goplausible.xyz/claim/tetg9f2x2hwwk42epy4p64430dd56qb9gndyt6szr0an8ka0x1qy2nepp21z979c8zgn27ftd4xdggw7c0n71j1k0p1vmfwc32bkg18',
-                )
-              }
-            />
+            <Link
+              href="https://goplausible.xyz/claim/tetg9f2x2hwwk42epy4p64430dd56qb9gndyt6szr0an8ka0x1qy2nepp21z979c8zgn27ftd4xdggw7c0n71j1k0p1vmfwc32bkg18"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Card
+                title="Claim Wakanda NFT"
+                step="Step 2"
+                image="https://res.cloudinary.com/dkuwhyun7/image/upload/v1709861971/payment-success-02_yvbygt.png"
+                description="To have the right to vote for or against proposals you must possess our WAKANDA NFTs."
+              />
+            </Link>
 
             <Card
               onclick={() => router.push('/governance')}
