@@ -37,6 +37,13 @@ export const CardProposal = ({ data }: CardProps) => {
   const yesPercentage = (yesVote / (yesVote + noVote)) * 100;
   const noPercentage = (noVote / (yesVote + noVote)) * 100;
 
+  const trimTexts =()=>{
+    if(description.length < 50){
+      return description;
+    }
+    return `${description.slice(0,55)}...`;
+  }
+
   return (
     <Link className={styles['proposal-card']} href={`/governance/${appId}`}>
       <div className={styles[statusClass]}>
@@ -49,7 +56,7 @@ export const CardProposal = ({ data }: CardProps) => {
         <div className={styles['title']}>{title}</div>
         <div className={styles['tag']}>{`Voting Tag: #${appId}`}</div>
       </div>
-      <div className={styles['texts']}>{description}</div>
+      <div className={styles['texts']}>{trimTexts()}</div>
       <div className={styles['bottom-content']}>
         <div className={styles['top-section']}>
           <div className={styles['yes-no-block']}>
