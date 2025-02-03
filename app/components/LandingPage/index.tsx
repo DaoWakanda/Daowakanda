@@ -14,6 +14,7 @@ import { ConnectWalletModal } from './connectModal';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { useNotify } from '@/hooks';
 import { useRouter } from 'next/router';
+import { CiBellOn } from 'react-icons/ci';
 
 export function LandingPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);

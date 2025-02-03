@@ -6,10 +6,10 @@
   overflow-y: scroll;
   scroll-behavior: smooth;
   position: relative;
-  background: #0F0D13;
+  background: #0f0d13;
   overflow-x: hidden;
 
-  @include tablet{
+  @include tablet {
     overflow-x: auto;
   }
 
@@ -52,7 +52,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: #1D1B20;
+    background: #1d1b20;
     color: #fff;
     min-height: 80px;
     padding: 0 72px;
@@ -60,7 +60,7 @@
     align-items: center;
     justify-content: space-between;
     z-index: 100;
-    border-bottom: 1px solid #F2F4F7;
+    border-bottom: 1px solid #f2f4f7;
 
     .link {
       width: 194px;
@@ -131,7 +131,7 @@
         }
       }
     }
-    .end{
+    .end {
       display: flex;
       gap: 8px;
 
@@ -144,27 +144,41 @@
         justify-content: center;
         gap: 8px;
         padding: 10px 8px;
-        background: #C5EE4F;
-        border: 1px solid #C5EE4F;
-        color: #00484F;
+        background: #c5ee4f;
+        border: 1px solid #c5ee4f;
+        color: #00484f;
         cursor: pointer;
-        font-family: "Inter";
+        font-family: 'Inter';
         font-size: 16px;
         font-weight: 600;
         line-height: 24px;
         text-align: left;
       }
-      .profile-dropdown{
-        background: #C5EE4F;
-        border: 1px solid #C5EE4F;
-        color: #00484F;
+      .profile-dropdown {
+        background: #c5ee4f;
+        border: 1px solid #c5ee4f;
+        color: #00484f;
         min-height: 44px;
         width: 40px;
         border-radius: 8px;
         padding: 6px;
       }
+      .notification {
+        border: 2px solid #c5ee4f;
+        color: #c5ee4f;
+        min-height: 40px;
+        width: 40px;
+        border-radius: 50px;
+        padding: 6px;
+        cursor: pointer;
+      }
+      .inactive-notification {
+        cursor: not-allowed;
+        border: 2px solid #757575;
+        color: #757575;
+        pointer-events: none;
+      }
     }
- 
   }
 }
 /*Side nav bar*/
