@@ -122,9 +122,6 @@ export function DevelopersPage() {
           onclick={() => {
             setNotificationModal(false);
           }}
-          showEditForm={function () {
-            throw new Error('Function not implemented.');
-          }}
         />
       )}
 
