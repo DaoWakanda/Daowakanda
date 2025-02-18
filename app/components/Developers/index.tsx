@@ -20,6 +20,8 @@ import { EditProfileModal } from './EditProfileModal';
 import { useDeveloperActions } from '@/features/developers/actions/developer.action';
 import { EditProfileForm } from './EditProfileForm';
 import { FiltersModal } from './FiltersModal';
+import { CiBellOn } from 'react-icons/ci';
+import { NotificationModal } from './NotificationModal';
 
 export function DevelopersPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -30,6 +32,7 @@ export function DevelopersPage() {
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [notificationModal, setNotificationModal] = useState(false);
   const [editProfileForm, setEditProfileForm] = useState(false);
   const [filterModal, setFilterModal] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
@@ -110,6 +113,14 @@ export function DevelopersPage() {
           showEditForm={() => {
             setEditProfileForm(true);
             setEditProfileModal(false);
+          }}
+        />
+      )}
+      {notificationModal && (
+        <NotificationModal
+          isActive={true}
+          onclick={() => {
+            setNotificationModal(false);
           }}
         />
       )}
@@ -332,6 +343,18 @@ export function DevelopersPage() {
                   return;
                 }
                 setEditProfileModal(true);
+              }}
+            />
+            <CiBellOn
+              className={`${styles['notification']} ${
+                activeAddress ? '' : styles['inactive-notification']
+              }`}
+              onClick={() => {
+                if (!activeAddress) {
+                  toggleConnectWallet();
+                  return;
+                }
+                setNotificationModal(true);
               }}
             />
           </div>

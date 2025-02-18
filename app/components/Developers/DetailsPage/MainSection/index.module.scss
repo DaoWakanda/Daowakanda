@@ -10,7 +10,7 @@
   flex-direction: column;
   font-family: 'Roboto';
 
-  @include tablet{
+  @include tablet {
     padding: 15px 32px;
     margin-top: 100px;
   }
@@ -56,15 +56,15 @@
         gap: 16px;
         height: 194px;
 
-        @include tablet{
+        @include tablet {
           height: 349px;
         }
 
-        img{
+        img {
           width: 194px;
           height: 194px;
 
-          @include tablet{
+          @include tablet {
             width: 349px;
             height: 349px;
           }
@@ -80,14 +80,14 @@
         font-size: 16px;
         color: #d1d1d6;
 
-        @include tablet{
+        @include tablet {
           font-size: 22px;
         }
       }
       .link {
         font-weight: 400;
         font-size: 16px;
-        color: #C7F284;
+        color: #c7f284;
         cursor: pointer;
       }
     }
@@ -99,7 +99,7 @@
       background: #211f26;
       padding: 10px 15px;
 
-      @include tablet{
+      @include tablet {
         gap: 24px;
         padding: 10px 20px;
       }
@@ -111,7 +111,7 @@
         min-height: 128px;
         font-family: 'Roboto';
 
-        @include tablet{
+        @include tablet {
           min-height: 96px;
         }
 
@@ -131,11 +131,11 @@
           flex-direction: column;
           gap: 8px;
 
-          @include tablet{
+          @include tablet {
             flex-direction: row;
             align-items: center;
           }
-        
+
           .info {
             display: flex;
             align-items: center;
@@ -151,7 +151,7 @@
               gap: 2px;
               align-items: center;
 
-              @include tablet{
+              @include tablet {
                 font-size: 16px;
                 gap: 10px;
               }
@@ -190,7 +190,7 @@
               font-size: 14px;
               font-weight: 600;
 
-              @include tablet{
+              @include tablet {
                 font-size: 16px;
               }
 
@@ -208,7 +208,7 @@
               font-size: 14px;
               font-weight: 500;
 
-              @include tablet{
+              @include tablet {
                 font-size: 16px;
               }
             }
@@ -232,9 +232,18 @@
           color: #d1d1d6;
           line-height: 20px;
 
-          @include tablet{
+          @include tablet {
             font-size: 22px;
             line-height: 28px;
+          }
+
+          a {
+            text-decoration: underline;
+            color: #abd138;
+
+            &:hover {
+              color: #c5ee4f;
+            }
           }
         }
 
@@ -258,8 +267,7 @@
             font-size: 14px;
             outline: none;
 
-
-            @include tablet{
+            @include tablet {
               width: 75%;
               font-size: 16px;
             }
@@ -282,7 +290,7 @@
             font-weight: 400;
             font-size: 16px;
 
-            @include tablet{
+            @include tablet {
               width: 305px;
             }
 
@@ -307,7 +315,7 @@
   margin: 26px 10px 26px 10px;
   min-height: 300px;
 
-  @include tablet{
+  @include tablet {
     margin: 26px 33px 26px 31px;
   }
 
@@ -326,7 +334,7 @@
       color: #fff;
     }
 
-    img{
+    img {
       width: 24px;
       height: 24px;
     }

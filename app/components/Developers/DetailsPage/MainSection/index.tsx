@@ -96,9 +96,12 @@ export function MainSection() {
         const minutes = Math.floor((difference % 3600) / 60);
         const seconds = Math.floor(difference % 60);
 
-        const formattedTime = `${String(days).padStart(2, '0')} days ${String(hours).padStart(2, '0')} hrs ${String(
-          minutes,
-        ).padStart(2, '0')}mins ${String(seconds).padStart(2, '0')}secs`;
+        const formattedTime = `${String(days).padStart(2, '0')} days ${String(
+          hours,
+        ).padStart(2, '0')} hrs ${String(minutes).padStart(
+          2,
+          '0',
+        )}mins ${String(seconds).padStart(2, '0')}secs`;
         setTimeLeft(formattedTime);
       } else {
         setTimeLeft('00:00:00');
@@ -244,7 +247,7 @@ export function MainSection() {
                     <input
                       type="url"
                       className={styles['input']}
-                      placeholder="Submit Github Repository link"
+                      placeholder="Submit response"
                       value={githubLink}
                       onChange={(e) => setGithubLink(e.target.value)}
                       required

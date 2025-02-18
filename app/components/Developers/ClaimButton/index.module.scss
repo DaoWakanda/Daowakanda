@@ -1,0 +1,52 @@
+@import '../../../../styles/index.scss';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #313030;
+  border: 2px solid #fff;
+  border-radius: 16px;
+  color: #fff;
+  border-radius: 8px;
+  align-items: center;
+  max-width: 500px;
+  // max-height: 700px;
+  padding: 10px 25px;
+  gap: 16px;
+  font-family: 'Roboto';
+  margin-top: 112px;
+
+  .notification-messages h1 {
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+  }
+
+  .claim-message {
+    color: #8e8e93;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .claim-message p {
+    margin-top: 5px;
+  }
+
+  .claim-message h3 {
+    margin-top: 20px;
+  }
+
+  .claim-button {
+    background-color: #c5ee4f;
+    color: #00484f;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
