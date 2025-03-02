@@ -22,6 +22,8 @@ import { EditProfileForm } from './EditProfileForm';
 import { FiltersModal } from './FiltersModal';
 import { CiBellOn } from 'react-icons/ci';
 import { NotificationModal } from './NotificationModal';
+import { useRecoilValue } from 'recoil';
+import { DeveloperProfileAtom } from '@/features/developers/state/developer.atom';
 
 export function DevelopersPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -34,6 +36,7 @@ export function DevelopersPage() {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
   const [editProfileForm, setEditProfileForm] = useState(false);
+  const developerProfile = useRecoilValue(DeveloperProfileAtom);
   const [filterModal, setFilterModal] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
@@ -45,12 +48,6 @@ export function DevelopersPage() {
   // Get the full current URL
   const currentUrl = `${router.asPath}`;
 
-  const toggleShowDropDown = () => {
-    setDropDownActive(true);
-  };
-  const toggleHideDropDown = () => {
-    setDropDownActive(false);
-  };
   const toggleShowDropDownTwo = () => {
     setDropDownActiveTwo(true);
   };
@@ -116,7 +113,7 @@ export function DevelopersPage() {
           }}
         />
       )}
-      {notificationModal && (
+      {notificationModal && !!developerProfile && (
         <NotificationModal
           isActive={true}
           onclick={() => {
@@ -345,18 +342,20 @@ export function DevelopersPage() {
                 setEditProfileModal(true);
               }}
             />
-            <CiBellOn
-              className={`${styles['notification']} ${
-                activeAddress ? '' : styles['inactive-notification']
-              }`}
-              onClick={() => {
-                if (!activeAddress) {
-                  toggleConnectWallet();
-                  return;
-                }
-                setNotificationModal(true);
-              }}
-            />
+            {!!developerProfile && (
+              <CiBellOn
+                className={`${styles['notification']} ${
+                  activeAddress ? '' : styles['inactive-notification']
+                }`}
+                onClick={() => {
+                  if (!activeAddress) {
+                    toggleConnectWallet();
+                    return;
+                  }
+                  setNotificationModal(true);
+                }}
+              />
+            )}
           </div>
         </div>
       )}

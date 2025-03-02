@@ -5,6 +5,7 @@ import {
   ICreateDeveloperDto,
   IDeveloper,
   ITrivia,
+  ITriviaBounty,
   IUpdateDeveloperDto,
   LeaderBoardItem,
   SubmitTriviaAnswer,
@@ -148,6 +149,36 @@ export const useDeveloperActions = () => {
     }
   };
 
+  const getUnclaimedRewards = async (address: string) => {
+    try {
+      const url = `user-trivia/unclaimed-bounty/${address}`;
+      const response = await fetchWrapper.get(url);
+
+      if (response.data) {
+        return response.data as ITriviaBounty[];
+      }
+
+      notify.error(response.error?.toString() || 'Something went wrong');
+    } catch (error) {
+      notify.error(error?.toString() || 'Something went wrong');
+    }
+  };
+
+  const claimReward = async (id: string) => {
+    try {
+      const url = `user-trivia/${id}/claim-bounty`;
+      const response = await fetchWrapper.patch(url);
+
+      if (response.data) {
+        return response.data;
+      }
+
+      notify.error(response.error?.toString() || 'Something went wrong');
+    } catch (error) {
+      notify.error(error?.toString() || 'Something went wrong');
+    }
+  };
+
   return {
     createDeveloperAccount,
     getDeveloperDetails,
@@ -157,5 +188,7 @@ export const useDeveloperActions = () => {
     submitTriviaAnswer,
     fetchLeaderboard,
     uploadImage,
+    getUnclaimedRewards,
+    claimReward,
   };
 };
