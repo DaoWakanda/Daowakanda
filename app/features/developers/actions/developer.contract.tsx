@@ -53,7 +53,11 @@ export const useDeveloperContractActions = () => {
       method: abiMethod,
       methodArgs: [amountToClaim],
       sender: activeAddress,
-      suggestedParams,
+      suggestedParams: {
+        ...suggestedParams,
+        flatFee: true,
+        fee: 2000,
+      },
       signer: transactionSigner,
       boxes: [
         {
