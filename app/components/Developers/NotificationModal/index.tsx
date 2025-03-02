@@ -23,6 +23,8 @@ export function NotificationModal({ isActive, onclick }: Props) {
 
   const fetchUnclaimedRewards = async () => {
     if (!activeAddress) return;
+
+    setSelectedReward(undefined);
     const rewards = await getUnclaimedRewards(activeAddress);
 
     if (rewards) {

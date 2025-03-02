@@ -21,15 +21,13 @@ export function ClaimButton({ data, refresh }: Props) {
   const handleClaimReward = async () => {
     if (isLoading) return;
 
-    console.log(data);
+    setIsLoading(true);
+    toast.loading('Claiming reward...', {
+      id: 'claim-reward',
+    });
 
     try {
-      setIsLoading(true);
-      toast.loading('Claiming reward...', {
-        id: 'claim-reward',
-      });
       await claimReward(data.bounty, data.smartContractId);
-      toast.success('Reward claimed successfully');
     } catch (error) {
       console.error(error);
       setIsLoading(false);
