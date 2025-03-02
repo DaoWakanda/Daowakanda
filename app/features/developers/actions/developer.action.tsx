@@ -166,7 +166,7 @@ export const useDeveloperActions = () => {
 
   const claimReward = async (id: string) => {
     try {
-      const url = `user-trivia/${id}/claim-bounty`;
+      const url = `user-trivia/${id}/claim`;
       const response = await fetchWrapper.patch(url);
 
       if (response.data) {
