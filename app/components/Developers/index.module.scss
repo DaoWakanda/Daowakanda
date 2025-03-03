@@ -45,6 +45,34 @@
       width: 24px;
       height: 24px;
     }
+
+    .notification-container {
+      position: relative;
+    }
+    .notification-count {
+      position: absolute;
+      top: 0;
+      right: -10px;
+      background: #da5635;
+      color: #fff;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .notification {
+      border: 2px solid #c5ee4f;
+      color: #c5ee4f;
+      min-height: 30px;
+      width: 30px;
+      border-radius: 50px;
+      padding: 6px;
+      cursor: pointer;
+    }
   }
 
   .desktop-header {
@@ -162,6 +190,24 @@
         width: 40px;
         border-radius: 8px;
         padding: 6px;
+      }
+      .notification-container {
+        position: relative;
+      }
+      .notification-count {
+        position: absolute;
+        top: 0;
+        right: -10px;
+        background: #da5635;
+        color: #fff;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 600;
       }
       .notification {
         border: 2px solid #c5ee4f;

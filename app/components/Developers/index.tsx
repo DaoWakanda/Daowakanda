@@ -24,19 +24,20 @@ import { CiBellOn } from 'react-icons/ci';
 import { NotificationModal } from './NotificationModal';
 import { useRecoilValue } from 'recoil';
 import { DeveloperProfileAtom } from '@/features/developers/state/developer.atom';
+import { ITriviaBounty } from '@/interfaces/developer.interface';
 
 export function DevelopersPage() {
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [activeDropDownTwo, setActiveDropDownTwo] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [openSideNav, setOpenSideNav] = useState(false);
-  const [dropDownActive, setDropDownActive] = useState(false);
   const [dropDownActiveTwo, setDropDownActiveTwo] = useState(false);
   const [connectWalletModal, setConnectWalletModal] = useState(false);
   const [editProfileModal, setEditProfileModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
   const [editProfileForm, setEditProfileForm] = useState(false);
   const developerProfile = useRecoilValue(DeveloperProfileAtom);
+  const [unclaimedRewards, setUnclaimedRewards] = useState<ITriviaBounty[]>();
+  const { getUnclaimedRewards } = useDeveloperActions();
   const [filterModal, setFilterModal] = useState(false);
   const { activeAddress, wallets: providers } = useWallet();
   const { width } = useWindowDimensions();
@@ -74,8 +75,19 @@ export function DevelopersPage() {
     }, 1500);
   };
 
+  const fetchUnclaimedRewards = async () => {
+    if (!activeAddress) return;
+
+    const rewards = await getUnclaimedRewards(activeAddress);
+
+    if (rewards) {
+      setUnclaimedRewards(rewards);
+    }
+  };
+
   useEffect(() => {
     getDeveloperDetails(activeAddress || '');
+    fetchUnclaimedRewards();
   }, [activeAddress]);
 
   return (
@@ -132,15 +144,43 @@ export function DevelopersPage() {
               />
             </Link>
           </div>
-          <div
-            className={styles['mobile-menu-bar']}
-            onClick={() => setOpenSideNav(true)}
-          >
-            <img
-              src="https://res.cloudinary.com/dlinprg6k/image/upload/v1710183576/menu-01_kkbysq.png"
-              alt="bar"
-            />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            {!!developerProfile && (
+              <div
+                className={styles['notification-container']}
+                onClick={() => {
+                  if (!activeAddress) {
+                    toggleConnectWallet();
+                    return;
+                  }
+                  setNotificationModal(true);
+                }}
+              >
+                <CiBellOn
+                  className={`${styles['notification']} ${
+                    activeAddress ? '' : styles['inactive-notification']
+                  }`}
+                  size={24}
+                />
+                {!!unclaimedRewards && unclaimedRewards.length > 0 && (
+                  <div className={styles['notification-count']}>
+                    {unclaimedRewards.length}
+                  </div>
+                )}
+                <div className={styles['notification-count']}>20</div>
+              </div>
+            )}
+            <div
+              className={styles['mobile-menu-bar']}
+              onClick={() => setOpenSideNav(true)}
+            >
+              <img
+                src="https://res.cloudinary.com/dlinprg6k/image/upload/v1710183576/menu-01_kkbysq.png"
+                alt="bar"
+              />
+            </div>
           </div>
+
           {openSideNav && (
             <div className={styles['mobile-side-nav']}>
               <header>
@@ -343,10 +383,8 @@ export function DevelopersPage() {
               }}
             />
             {!!developerProfile && (
-              <CiBellOn
-                className={`${styles['notification']} ${
-                  activeAddress ? '' : styles['inactive-notification']
-                }`}
+              <div
+                className={styles['notification-container']}
                 onClick={() => {
                   if (!activeAddress) {
                     toggleConnectWallet();
@@ -354,7 +392,18 @@ export function DevelopersPage() {
                   }
                   setNotificationModal(true);
                 }}
-              />
+              >
+                <CiBellOn
+                  className={`${styles['notification']} ${
+                    activeAddress ? '' : styles['inactive-notification']
+                  }`}
+                />
+                {!!unclaimedRewards && unclaimedRewards.length > 0 && (
+                  <div className={styles['notification-count']}>
+                    {unclaimedRewards.length}
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import { useWallet } from '@txnlab/use-wallet-react';
 import { RightBackgroundOverlay } from '@/components/shared/BackgroundOverlay/RightBackgroundOverlay';
@@ -8,6 +8,8 @@ import { useDeveloperActions } from '@/features/developers/actions/developer.act
 import { ITriviaBounty } from '@/interfaces/developer.interface';
 import { useRecoilValue } from 'recoil';
 import { DeveloperProfileAtom } from '@/features/developers/state/developer.atom';
+import { useWindowDimensions } from '@/hooks';
+import { BackgroundOverlay } from '@/components/shared';
 
 interface Props {
   isActive: boolean;
@@ -20,6 +22,8 @@ export function NotificationModal({ isActive, onclick }: Props) {
   const developerProfile = useRecoilValue(DeveloperProfileAtom);
   const [unclaimedRewards, setUnclaimedRewards] = useState<ITriviaBounty[]>(); // State for ClaimButton visibility
   const [selectedReward, setSelectedReward] = useState<ITriviaBounty>();
+  const { width } = useWindowDimensions();
+  const isMobile = width ? width < 768 : false;
 
   const fetchUnclaimedRewards = async () => {
     if (!activeAddress) return;
@@ -32,12 +36,34 @@ export function NotificationModal({ isActive, onclick }: Props) {
     }
   };
 
+  const Container = ({
+    children,
+    onClose,
+  }: {
+    children: ReactNode;
+    onClose: () => void;
+  }) => {
+    if (isMobile) {
+      return (
+        <BackgroundOverlay visible={isActive} onClose={onClose}>
+          {children}
+        </BackgroundOverlay>
+      );
+    }
+
+    return (
+      <RightBackgroundOverlay visible={isActive} onClose={onClose}>
+        {children}
+      </RightBackgroundOverlay>
+    );
+  };
+
   useEffect(() => {
     fetchUnclaimedRewards();
   }, []);
   return (
     <>
-      <RightBackgroundOverlay visible={isActive} onClose={onclick}>
+      <Container onClose={onclick}>
         {/* ClaimButton Modal (Only appears when showClaimModal is true) */}
         {!!selectedReward && (
           <div className={styles['claim-button-container']}>
@@ -48,44 +74,47 @@ export function NotificationModal({ isActive, onclick }: Props) {
           </div>
         )}
 
-        <div className={styles['card']}>
-          <div className={styles['section']}>
-            <div className={styles['notification-section']}>
-              <h2>Notifications</h2>
+        {!selectedReward && (
+          <div className={styles['card']}>
+            <div className={styles['section']}>
+              <div className={styles['notification-section']}>
+                <h2>Notifications</h2>
 
-              {unclaimedRewards
-                ? unclaimedRewards.map((reward, index) => (
-                    <div
-                      key={index}
-                      className={styles['notifications']}
-                      onClick={() => setSelectedReward(reward)} // Click event to open ClaimButton
-                    >
-                      <div className={styles['notification-messages']}>
-                        <h1>Congratulations, Algo Task winners</h1>
-                        <p>
-                          Congratulations {developerProfile?.firstName}, you’ve
-                          been selected as part of the winners of the “
-                          {reward.title}” task. Click here to claim your reward.
-                        </p>
+                {unclaimedRewards
+                  ? unclaimedRewards.map((reward, index) => (
+                      <div
+                        key={index}
+                        className={styles['notifications']}
+                        onClick={() => setSelectedReward(reward)} // Click event to open ClaimButton
+                      >
+                        <div className={styles['notification-messages']}>
+                          <h1>Congratulations, Algo Task winners</h1>
+                          <p>
+                            Congratulations {developerProfile?.firstName},
+                            you’ve been selected as part of the winners of the “
+                            {reward.title}” task. Click here to claim your
+                            reward.
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))
-                : Array.from({ length: 3 }).map((_, index) => (
-                    <div key={index} className={styles['notifications']}>
-                      <div className={styles['notification-messages']}>
-                        <h1>
-                          <Skeleton width={200} />
-                        </h1>
-                        <p>
-                          <Skeleton count={2} width={'95%'} />
-                        </p>
+                    ))
+                  : Array.from({ length: 3 }).map((_, index) => (
+                      <div key={index} className={styles['notifications']}>
+                        <div className={styles['notification-messages']}>
+                          <h1>
+                            <Skeleton width={200} />
+                          </h1>
+                          <p>
+                            <Skeleton count={2} width={'95%'} />
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+              </div>
             </div>
           </div>
-        </div>
-      </RightBackgroundOverlay>
+        )}
+      </Container>
     </>
   );
 }
