@@ -167,7 +167,6 @@ export function DevelopersPage() {
                     {unclaimedRewards.length}
                   </div>
                 )}
-                <div className={styles['notification-count']}>20</div>
               </div>
             )}
             <div
