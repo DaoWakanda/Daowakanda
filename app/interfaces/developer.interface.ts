@@ -71,3 +71,11 @@ export interface LeaderBoardItem {
   name: string;
   totalAlgos: number;
 }
+
+export interface ITriviaBounty {
+  id: string;
+  githubLink: string;
+  title: string;
+  smartContractId: number;
+  bounty: number;
+}
