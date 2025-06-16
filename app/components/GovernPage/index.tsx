@@ -163,7 +163,7 @@ export function GovernPage() {
                     )}
                   </div>
                   <Link className={styles['nav-item']} href="/developers">
-                    AlgoDev
+                    Leaderboard
                   </Link>
                   <Link className={styles['nav-item']} href="/about">
                     About
@@ -278,7 +278,7 @@ export function GovernPage() {
                 href="/developers"
                 style={{ color: currentUrl == `/about` ? `#fff` : `#757575` }}
               >
-                AlgoDev
+                Leaderboard
               </Link>
             </div>
             <div

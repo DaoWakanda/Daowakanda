@@ -172,7 +172,7 @@ export function DeveloperDetailsPage() {
                     FPL Tournament
                   </Link> */}
                   <Link className={styles['nav-item']} href="/developers">
-                    AlgoDev
+                    Leaderboard
                   </Link>
                 </div>
                 <div
@@ -283,7 +283,7 @@ export function DeveloperDetailsPage() {
                   color: `#fff`,
                 }}
               >
-                AlgoDev
+                Leaderboard
               </Link>
             </div>
           </div>

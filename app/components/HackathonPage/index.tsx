@@ -155,7 +155,7 @@ export function HackathonPage() {
                     )}
                   </div>
                   <Link className={styles['nav-item']} href="/developers">
-                    AlgoDev
+                    Leaderboard
                   </Link>
                   <Link className={styles['nav-item']} href="/about">
                     About
@@ -252,7 +252,7 @@ export function HackathonPage() {
               className={styles['nav-item']}
               onMouseLeave={() => setActiveDropDownTwo(false)}
             >
-              <Link href="/developers">AlgoDev</Link>
+              <Link href="/developers">Leaderboard</Link>
             </div>
             <div
               className={styles['nav-item']}

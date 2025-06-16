@@ -230,7 +230,7 @@ export function DevelopersPage() {
                     )}
                   </div>
                   <Link className={styles['nav-item']} href="/developers">
-                    AlgoDev
+                    Leaderboard
                   </Link>
                   <Link className={styles['nav-item']} href="/about">
                     About
@@ -345,7 +345,7 @@ export function DevelopersPage() {
                   color: currentUrl == `/developers` ? `#fff` : `#757575`,
                 }}
               >
-                AlgoDev
+                Leaderboard
               </Link>
             </div>
             <div
